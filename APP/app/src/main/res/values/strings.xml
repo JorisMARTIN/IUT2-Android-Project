@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">L\'école des loustics</string>
+    <string name="mainActWelcomMessage">Bienvenue sur l\'application de l\'écolde des loustics</string>
+    <string name="MainActWhoMessage">Qui est-tu ?</string>
+</resources>
