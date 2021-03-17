@@ -31,42 +31,12 @@
             android:textSize="20sp"/>
 
         <ScrollView
+            android:id="@+id/activity_main_profiles_scroll"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+            <!-- Load users profiles by inflate of component_user_profile.xml -->
 
-
-                <LinearLayout
-                    android:id="@+id/adHoc"
-                    android:layout_width="match_parent"
-                    android:layout_height="100dp"
-                    android:background="#AAA5A5"
-                    android:baselineAligned="false"
-                    android:orientation="horizontal"
-                    android:paddingLeft="10dp"
-                    android:paddingTop="5dp"
-                    android:paddingRight="10dp"
-                    android:paddingBottom="5dp">
-
-                    <ImageView
-                        android:layout_width="100dp"
-                        android:layout_height="match_parent"
-                        android:contentDescription="UserImage"
-                        android:src="@drawable/user" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:text="Ad Hoc"
-                        android:textSize="18dp" />
-
-                </LinearLayout>
-            </LinearLayout>
         </ScrollView>
 
 
