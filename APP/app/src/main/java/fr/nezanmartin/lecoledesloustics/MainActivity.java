@@ -2,6 +2,7 @@ package fr.nezanmartin.lecoledesloustics;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -26,9 +27,8 @@ public class MainActivity extends AppCompatActivity {
         this.account.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /* TODO
-                Create intent with save of current user
-                 */
+                Intent intent = new Intent(MainActivity.this, LevelSelect.class);
+                startActivity(intent);
             }
         });
     }
