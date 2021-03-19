@@ -7,6 +7,9 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
+import java.io.File;
+import java.io.FileReader;
+
 public class DatabaseClient {
 
     // Instance unique permettant de faire le lien avec la base de données
@@ -19,13 +22,13 @@ public class DatabaseClient {
     private DatabaseClient(final Context context) {
 
         // Créer l'objet représentant la base de données de votre application
-        // à l'aide du "Room database builder"
-        // MyToDos est le nom de la base de données
-        //appDatabase = Room.databaseBuilder(context, AppDatabase.class, "EcoleDesLousticsDB").build();
-
-        ////////// REMPLIR LA BD à la première création à l'aide de l'objet roomDatabaseCallback
-        // Ajout de la méthode addCallback permettant de populate (remplir) la base de données à sa création
-        appDatabase = Room.databaseBuilder(context, AppDatabase.class, "EcoleDesLousticsDB").addCallback(roomDatabaseCallback).build();
+        // Remplissage de la bdd avec addCallback pour les données "test" et createFromAsset pour
+        // copier la bdd d'initialisation
+        appDatabase = Room
+                .databaseBuilder(context, AppDatabase.class, "EcoleDesLousticsDB")
+                .addCallback(roomDatabaseCallback)
+                .createFromAsset("base_levels.db")
+                .build();
     }
 
     // Méthode statique
