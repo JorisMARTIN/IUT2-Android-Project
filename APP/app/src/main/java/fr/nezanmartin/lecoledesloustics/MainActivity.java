@@ -2,15 +2,18 @@ package fr.nezanmartin.lecoledesloustics;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import fr.nezanmartin.lecoledesloustics.Database.DatabaseClient;
@@ -41,6 +44,9 @@ public class MainActivity extends AppCompatActivity {
         // Initialise view
         this.profilesScroll = findViewById(R.id.activity_main_profiles_scroll);
 
+        // Set current user to false to everyone
+
+
         //Get all users from database stock them in allUsers ArrayList
         getAllUsers();
 
@@ -69,18 +75,18 @@ public class MainActivity extends AppCompatActivity {
                 super.onPostExecute(users);
 
                 allUsers = users;
+                // Display users on scroll view
                 initView();
             }
 
         }
 
-        //////////////////////////
-        // IMPORTANT bien penser à executer la demande asynchrone
         CollectUsers cu = new CollectUsers();
         cu.execute();
     }
 
     private void initView() {
+
         for(User user : allUsers){
 
             LinearLayout globalLayout = new LinearLayout(this);
@@ -89,15 +95,71 @@ public class MainActivity extends AppCompatActivity {
 
             LinearLayout layout = (LinearLayout) getLayoutInflater().inflate(R.layout.component_user_profil, null);
 
-            ImageView img =  layout.findViewById(R.id.profile_template_img);
-
             TextView name = (TextView) layout.findViewById(R.id.profile_template_name);
-            name.setText(user.getFistname() + user.getName());
+            name.setText(user.getFistname() + " " + user.getName());
 
             globalLayout.addView(layout);
 
-            globalLayout.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            globalLayout.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
+
+            // Add onClickListener
+            globalLayout.setOnClickListener(new View.OnClickListener(){
+
+                @Override
+                public void onClick(View v) {
+                    setCurrentUser(user);
+                }
+            });
+
+
             profilesScroll.addView(globalLayout);
         }
+    }
+
+
+    /**
+     * Set current_user attribut in DB to false to the old current user and to true to the actual current user
+     * Then create intent for start to use the app
+     *
+     * @param currentUser the current user
+     */
+    private void setCurrentUser(User currentUser){
+
+        // Set current user in DB + Create intent
+        currentUser.setCurrentUser(true);
+
+        class SaveCurrentUser extends AsyncTask<Void, Void, User> {
+
+            @Override
+            protected User doInBackground(Void... voids) {
+
+                // Check if there was an old current user
+                // If yes set the attribut to false
+                User oldCurrentUser = database.getAppDatabase().userDAO().getCurrentUser();
+                if(oldCurrentUser != null){
+                    oldCurrentUser.setCurrentUser(false);
+                    database.getAppDatabase().userDAO().update(oldCurrentUser);
+                }
+
+                // Update the current user
+                database.getAppDatabase().userDAO().update(currentUser);
+
+                // Return the actual current user
+                return database.getAppDatabase().userDAO().getCurrentUser();
+            }
+
+            @Override
+            protected void onPostExecute(User user){
+                super.onPostExecute(user);
+
+                //Create intent
+                Intent levelSelect = new Intent(MainActivity.this, LevelSelect.class);
+                startActivity(levelSelect);
+            }
+
+        }
+
+        SaveCurrentUser save = new SaveCurrentUser();
+        save.execute();
     }
 }

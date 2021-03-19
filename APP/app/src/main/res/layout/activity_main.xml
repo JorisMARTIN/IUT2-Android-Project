@@ -33,7 +33,7 @@
         <ScrollView
             android:id="@+id/activity_main_profiles_scroll"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <!-- Load users profiles by inflate of component_user_profile.xml -->
 
