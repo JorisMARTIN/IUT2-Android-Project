@@ -5,12 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Gravity;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,7 +44,6 @@ public class MainActivity extends AppCompatActivity {
         //Get all users from database stock them in allUsers ArrayList
         getAllUsers();
 
-        initView();
     }
 
     private void getAllUsers() {
@@ -72,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
                 super.onPostExecute(users);
 
                 allUsers = users;
-
+                initView();
             }
 
         }
@@ -99,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
 
             globalLayout.addView(layout);
 
-            globalLayout.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            globalLayout.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
             profilesScroll.addView(globalLayout);
         }
     }
