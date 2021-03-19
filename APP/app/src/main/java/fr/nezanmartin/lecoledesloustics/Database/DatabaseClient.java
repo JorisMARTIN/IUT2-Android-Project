@@ -52,6 +52,8 @@ public class DatabaseClient {
 
             //
             db.execSQL("INSERT INTO user (name, firstname, current_user) VALUES(\"Bob\", \"loustic\", 0);");
+            //db.execSQL("INSERT INTO user (name, firstname, current_user) VALUES(\"Bob\", \"loustic\", 0);");
+            //db.execSQL("INSERT INTO user (name, firstname, current_user) VALUES(\"Boby3\", \"loustic\", 0);");
         }
     };
 }
