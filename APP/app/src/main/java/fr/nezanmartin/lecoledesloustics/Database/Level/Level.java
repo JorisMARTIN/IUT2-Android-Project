@@ -36,8 +36,28 @@ public class Level implements Serializable {
         return difficulty;
     }
 
-    public boolean hasBeenPlayed() {
+    public boolean getHasBeenPlayed() {
         return hasBeenPlayed;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setActivity(String activity) {
+        this.activity = activity;
+    }
+
+    public void setDifficulty(int difficulty) {
+        this.difficulty = difficulty;
+    }
+
+    public void setHasBeenPlayed(boolean hasBeenPlayed) {
+        this.hasBeenPlayed = hasBeenPlayed;
     }
 
     public void setScore(int score) {
@@ -47,4 +67,6 @@ public class Level implements Serializable {
             this.score = score;
         }
     }
+
+
 }

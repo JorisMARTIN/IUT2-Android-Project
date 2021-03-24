@@ -1,9 +1,9 @@
 CREATE TABLE level (
-    id INT PRIMARY KEY,
-    activity VARCHAR(200),
-    difficulty INT,
-    hasBeenPlayed BOOLEAN,
-    score INT
+    id INTEGER NOT NULL PRIMARY KEY,
+    activity TEXT,
+    difficulty INTEGER NOT NULL,
+    hasBeenPlayed INTEGER NOT NULL,
+    score INTEGER NOT NULL
 );
 
 INSERT INTO level VALUES (
