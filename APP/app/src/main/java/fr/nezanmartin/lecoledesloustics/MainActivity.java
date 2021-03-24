@@ -7,13 +7,11 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import fr.nezanmartin.lecoledesloustics.Database.DatabaseClient;
@@ -26,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     List<User> allUsers;
 
     // VIEW
-    ScrollView profilesScroll;
+    LinearLayout profilesScroll;
 
 
     @Override
@@ -44,8 +42,6 @@ public class MainActivity extends AppCompatActivity {
         // Initialise view
         this.profilesScroll = findViewById(R.id.activity_main_profiles_scroll);
 
-        // Set current user to false to everyone
-
 
         //Get all users from database stock them in allUsers ArrayList
         getAllUsers();
@@ -55,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
     private void getAllUsers() {
 
         /**
-         * Création d'une classe asynchrone pour sauvegarder la tache donnée par l'utilisateur
+         * Création d'une classe asynchrone pour récuperer les utilisateurs
          */
         class CollectUsers extends AsyncTask<Void, Void, List<User>> {
 
@@ -97,11 +93,7 @@ public class MainActivity extends AppCompatActivity {
 
             TextView name = (TextView) layout.findViewById(R.id.profile_template_name);
             name.setText(user.getFistname() + " " + user.getName());
-
             globalLayout.addView(layout);
-
-            globalLayout.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
-
             // Add onClickListener
             globalLayout.setOnClickListener(new View.OnClickListener(){
 
@@ -110,8 +102,7 @@ public class MainActivity extends AppCompatActivity {
                     setCurrentUser(user);
                 }
             });
-
-
+            globalLayout.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
             profilesScroll.addView(globalLayout);
         }
     }

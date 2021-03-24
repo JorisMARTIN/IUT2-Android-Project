@@ -7,9 +7,6 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-import java.io.File;
-import java.io.FileReader;
-
 public class DatabaseClient {
 
     // Instance unique permettant de faire le lien avec la base de données
@@ -27,7 +24,7 @@ public class DatabaseClient {
         appDatabase = Room
                 .databaseBuilder(context, AppDatabase.class, "EcoleDesLousticsDB")
                 .addCallback(roomDatabaseCallback)
-                .createFromAsset("base_levels.db")
+                //.createFromAsset("base_levels.db")
                 .build();
     }
 
@@ -53,10 +50,8 @@ public class DatabaseClient {
         public void onCreate(@NonNull SupportSQLiteDatabase db) {
             super.onCreate(db);
 
-            //
             db.execSQL("INSERT INTO user (name, firstname, current_user) VALUES(\"Bob\", \"loustic\", 0);");
-            //db.execSQL("INSERT INTO user (name, firstname, current_user) VALUES(\"Bob\", \"loustic\", 0);");
-            //db.execSQL("INSERT INTO user (name, firstname, current_user) VALUES(\"Boby3\", \"loustic\", 0);");
+            db.execSQL("INSERT INTO user (name, firstname, current_user) VALUES(\"Marie\", \"lousticette\", 0);");
         }
     };
 }
