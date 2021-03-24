@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -24,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
     List<User> allUsers;
 
     // VIEW
-    LinearLayout profilesScroll;
+    LinearLayout container;
 
 
     @Override
@@ -40,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // Initialise view
-        this.profilesScroll = findViewById(R.id.activity_main_profiles_scroll);
+        this.container = findViewById(R.id.activity_main_profiles_scroll);
 
 
         //Get all users from database stock them in allUsers ArrayList
@@ -103,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
             globalLayout.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
-            profilesScroll.addView(globalLayout);
+            container.addView(globalLayout);
         }
     }
 
