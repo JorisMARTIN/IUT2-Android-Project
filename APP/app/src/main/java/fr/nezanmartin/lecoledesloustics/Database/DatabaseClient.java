@@ -24,7 +24,7 @@ public class DatabaseClient {
         appDatabase = Room
                 .databaseBuilder(context, AppDatabase.class, "EcoleDesLousticsDB")
                 .addCallback(roomDatabaseCallback)
-                //.createFromAsset("base_levels.db")
+                .createFromAsset("base_levels.db")
                 .build();
     }
 
