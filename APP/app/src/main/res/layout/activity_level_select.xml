@@ -5,31 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".LevelSelect">
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="sans-serif"
-        android:gravity="center"
-        android:paddingTop="20dp"
-        android:paddingBottom="20dp"
-        android:text="@string/levelSelectActWelcomeMessage"
-        android:textSize="24sp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="OU"
-        android:textSize="16sp"
-        android:gravity="center" />
+    tools:context=".LevelSelect"
+    android:paddingTop="20dp">
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="@string/levelSelectActChangeUser" />
+        android:text="@string/levelSelectActChangeUser"
+        android:onClick="switchUser"
+        />
 
     <LinearLayout
         android:id="@+id/level_select_area"

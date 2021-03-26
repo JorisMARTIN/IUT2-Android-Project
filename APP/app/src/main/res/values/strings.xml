@@ -2,10 +2,10 @@
     <string name="app_name">L\'école des loustics</string>
     <string name="mainActWelcomMessage">Bienvenue sur l\'application de l\'école des loustics</string>
     <string name="MainActWhoMessage">Qui est-tu ?</string>
-    <string name="levelSelectActWelcomeMessage">Choisis un niveau</string>
     <string name="levelSelectActChangeUser">Changer d\'utilisateur</string>
     <string name="addition_activity_text">Résoud les additions suivantes :</string>
     <string name="previous_button_text">Précédent</string>
     <string name="next_button_text">Suivant</string>
+    <string name="userimage">Image de profil</string>
 
 </resources>
