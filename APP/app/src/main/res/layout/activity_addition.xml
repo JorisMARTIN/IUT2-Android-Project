@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,19 +10,46 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100sp"
         android:fontFamily="sans-serif-black"
         android:gravity="center"
         android:text="@string/addition_activity_text"
-        android:textSize="20sp"
+        android:textSize="30sp"
         android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/addition_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="\?/10"
+        android:gravity="center"
+        android:layout_marginTop="10sp"
+        android:textSize="20sp"/>
 
     <LinearLayout
         android:id="@+id/addition_container"
         android:layout_width="match_parent"
-        android:layout_height="200sp"
-        android:orientation="horizontal">
-        <!-- Container for addition added by inflate -->
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="30sp"
+        android:paddingBottom="30sp"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/addition_question"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="\? + \? = "
+            android:gravity="center"
+            android:textSize="26sp"/>
+
+        <EditText
+            android:id="@+id/addition_answer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="\?"
+            android:inputType="number"
+            android:textSize="26sp"/>
+
     </LinearLayout>
 
     <LinearLayout
@@ -47,6 +75,14 @@
             android:layout_marginLeft="10sp"/>
 
     </LinearLayout>
+
+    <Button
+        android:id="@+id/addition_confirm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/Validate_text"
+        app:backgroundTint="@color/blue"/>
 
 
 </LinearLayout>

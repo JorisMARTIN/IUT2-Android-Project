@@ -15,6 +15,7 @@ import java.util.List;
 
 import fr.nezanmartin.lecoledesloustics.Database.DatabaseClient;
 import fr.nezanmartin.lecoledesloustics.Database.User.User;
+import fr.nezanmartin.lecoledesloustics.mathematics.addition.AdditionActivity;
 
 public class MainActivity extends AppCompatActivity {
 
