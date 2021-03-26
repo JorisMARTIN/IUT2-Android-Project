@@ -7,5 +7,6 @@
     <string name="previous_button_text">Précédent</string>
     <string name="next_button_text">Suivant</string>
     <string name="userimage">Image de profil</string>
-
+    <string name="Validate_text">Valider</string>
+    <string name="Back_text">Retour</string>
 </resources>
