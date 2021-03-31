@@ -53,7 +53,7 @@ public class LevelSelect extends AppCompatActivity {
                 HashMap<String, List<Level>> levels = new HashMap<>();
 
                 for (String activity: activities) {
-                    levels.put(activity, dao.getActivityLevels(activity));
+                    levels.put(activity, dao.getLevels(activity));
                 }
 
                 return levels;
@@ -91,7 +91,7 @@ public class LevelSelect extends AppCompatActivity {
                 levelButtonButton.setText(String.valueOf(level.getDifficulty()));
 
                 RatingBar levelButtonScore = levelButton.findViewById(R.id.level_button_score);
-                levelButtonScore.setRating(level.getScore());
+                levelButtonScore.setRating((float) 0.5); // TODO: fetch score from GameDAO
 
                 levelActivityArea.addView(levelButton);
             }

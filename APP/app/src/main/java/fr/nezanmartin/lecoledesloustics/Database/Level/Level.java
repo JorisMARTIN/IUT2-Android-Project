@@ -12,61 +12,44 @@ public class Level implements Serializable {
     @PrimaryKey(autoGenerate = true)
     private int id;
 
-    @ColumnInfo(name = "activity")
-    private String activity;
+    @ColumnInfo(name = "name")
+    private String name;
 
     @ColumnInfo(name = "difficulty")
     private int difficulty;
 
-    @ColumnInfo(name = "hasBeenPlayed")
-    private boolean hasBeenPlayed;
-
-    @ColumnInfo(name = "score")
-    private int score;
+    @ColumnInfo(name = "game_mode")
+    private String gameMode;
 
     public int getId() {
         return id;
     }
 
-    public String getActivity() {
-        return activity;
+    public String getName() {
+        return name;
     }
 
     public int getDifficulty() {
         return difficulty;
     }
 
-    public boolean getHasBeenPlayed() {
-        return hasBeenPlayed;
-    }
-
-    public int getScore() {
-        return score;
+    public String getGameMode() {
+        return gameMode;
     }
 
     public void setId(int id) {
         this.id = id;
     }
 
-    public void setActivity(String activity) {
-        this.activity = activity;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public void setDifficulty(int difficulty) {
         this.difficulty = difficulty;
     }
 
-    public void setHasBeenPlayed(boolean hasBeenPlayed) {
-        this.hasBeenPlayed = hasBeenPlayed;
+    public void setGameMode(String gameMode) {
+        this.gameMode = gameMode;
     }
-
-    public void setScore(int score) {
-        this.hasBeenPlayed = true;
-
-        if (score > this.score) {
-            this.score = score;
-        }
-    }
-
-
 }

@@ -10,11 +10,11 @@ import java.util.List;
 @Dao
 public interface LevelDAO {
 
-    @Query("SELECT DISTINCT activity FROM level")
+    @Query("SELECT DISTINCT name FROM level")
     List<String> getActivities();
 
-    @Query("SELECT * FROM level WHERE activity = (:activity)")
-    List<Level> getActivityLevels(String activity);
+    @Query("SELECT * FROM level WHERE name = (:activity)")
+    List<Level> getLevels(String activity);
 
     @Insert
     void insert(Level level);

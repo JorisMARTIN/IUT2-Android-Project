@@ -10,12 +10,8 @@ import java.io.Serializable;
 import fr.nezanmartin.lecoledesloustics.Database.Level.Level;
 import fr.nezanmartin.lecoledesloustics.Database.User.User;
 
-@Entity(foreignKeys = {
-        @ForeignKey(entity = User.class, parentColumns = "id", childColumns = "user_id"),
-        @ForeignKey(entity = Level.class, parentColumns = "id", childColumns = "level_id")
-})
+@Entity
 public class Game implements Serializable {
-
     @PrimaryKey(autoGenerate = true)
     private int id;
 
@@ -57,6 +53,8 @@ public class Game implements Serializable {
     }
 
     public void setScore(float score) {
-        this.score = score;
+        if (score > this.score) {
+            this.score = score;
+        }
     }
 }
