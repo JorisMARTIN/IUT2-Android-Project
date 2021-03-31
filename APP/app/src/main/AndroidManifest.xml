@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LécoleDesLoustics">
         <activity android:name=".mathematics.ResultActivity"></activity>
-        <activity android:name=".mathematics.addition.AdditionActivity" />
+        <activity android:name=".mathematics.OperationActivity" />
         <activity android:name=".LevelSelect" />
         <activity android:name=".MainActivity">
             <intent-filter>

@@ -1,10 +1,10 @@
-package fr.nezanmartin.lecoledesloustics.mathematics.operation;
+package fr.nezanmartin.lecoledesloustics.mathematics.model;
 
 public class Multiplication extends Operation{
 
 
-    public Multiplication(int operand1, int operand2) {
-        super(operand1, operand2);
+    public Multiplication(int difficulty) {
+        super(difficulty);
         this.operationCharacter = 'x';
     }
 

@@ -1,10 +1,10 @@
-package fr.nezanmartin.lecoledesloustics.mathematics.operation;
+package fr.nezanmartin.lecoledesloustics.mathematics.model;
 
 public class Addition extends Operation{
 
-    public Addition(int operand1, int operand2){
-        super(operand1, operand2);
-        this.operationCharacter = '/';
+    public Addition(int difficulty){
+        super(difficulty);
+        this.operationCharacter = '+';
     }
 
     @Override

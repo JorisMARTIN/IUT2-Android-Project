@@ -1,4 +1,4 @@
-package fr.nezanmartin.lecoledesloustics.mathematics.addition;
+package fr.nezanmartin.lecoledesloustics.mathematics;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,25 +12,26 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.LinkedHashMap;
-import java.util.Random;
 
 import fr.nezanmartin.lecoledesloustics.R;
-import fr.nezanmartin.lecoledesloustics.mathematics.ResultActivity;
-import fr.nezanmartin.lecoledesloustics.mathematics.operation.Addition;
-import fr.nezanmartin.lecoledesloustics.mathematics.operation.Operation;
+import fr.nezanmartin.lecoledesloustics.mathematics.model.ListOperation;
+import fr.nezanmartin.lecoledesloustics.mathematics.model.Operation;
 
-public class OperationActivity<T extends Operation> extends AppCompatActivity implements View.OnClickListener{
+public class OperationActivity extends AppCompatActivity implements View.OnClickListener{
 
     //DATA
     int difficulty = 1; //TODO: getDifficulty from previous activity
+    String operationName = "addition"; //TODO: getName from presvious activity
+
+    ListOperation operations;
 
     int currentOperationID;
-    LinkedHashMap<T, Integer> results;
+    LinkedHashMap<Operation, Integer> results;
 
     //VIEW
     LinearLayout operationContainner;
 
-    TextView operationID, question;
+    TextView operationTitle, operationID, question;
     EditText answer;
 
     Button previousButton, nextButton, validate;
@@ -38,22 +39,30 @@ public class OperationActivity<T extends Operation> extends AppCompatActivity im
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_addition);
+        setContentView(R.layout.activity_operation);
 
-        operationContainner = findViewById(R.id.addition_container);
+        operationContainner = findViewById(R.id.operation_container);
 
-        operationID = findViewById(R.id.addition_id);
+        operationTitle = findViewById(R.id.operation_title);
+        operationID = findViewById(R.id.operation_id);
 
-        question = findViewById(R.id.addition_question);
-        answer = findViewById(R.id.addition_answer);
+        question = findViewById(R.id.operation_question);
+        answer = findViewById(R.id.operation_answer);
 
-        previousButton = findViewById(R.id.addition_previous_button);
-        nextButton = findViewById(R.id.addition_next_button);
-        validate = findViewById(R.id.addition_confirm);
+        previousButton = findViewById(R.id.operation_previous_button);
+        nextButton = findViewById(R.id.operation_next_button);
+        validate = findViewById(R.id.operation_confirm);
+
+        operationTitle.setText("Résoud les " + this.operationName + "s suivantes :");
+
+        operations = new ListOperation(difficulty, operationName);
 
         results = new LinkedHashMap<>();
 
-        initOperation();
+        // Fill the result map whith the operation
+        for(Operation op : this.operations.getOperations()){
+            results.put(op, -1);
+        }
 
         currentOperationID = 0;
         updateDisplay();
@@ -62,42 +71,16 @@ public class OperationActivity<T extends Operation> extends AppCompatActivity im
         nextButton.setOnClickListener(this);
 
         validate.setOnClickListener(this);
-
     }
 
-    private void initOperation() {
-        Random random = new Random();
-        T operation;
-        int operand1, operand2;
-
-
-        for(int id=0; id<10; id++){
-
-            if(difficulty == 1){
-                operand1 = random.nextInt(9-1) + 1;
-                operand2 = random.nextInt(9-1) + 1;
-            }else if(difficulty == 2){
-                operand1 = random.nextInt(9-1) + 1;
-                operand2 = random.nextInt(99-10) + 10;
-            }else{
-                operand1 = random.nextInt(99-10) + 10;
-                operand2 = random.nextInt(99-10) + 10;
-            }
-
-            operation = new Operation(operand1, operand2);
-
-            //Hash map Addition object, addition answer
-            results.put(operation, -1);
-        }
-    }
 
     @Override
     public void onClick(View v) {
 
-        Addition currentAddition;
+        Operation currentOperation;
         if(!TextUtils.isEmpty(answer.getText())){
-            currentAddition = getAdditionInMapByIndex(currentOperationID);
-            results.put(currentAddition, Integer.valueOf(answer.getText().toString()));
+            currentOperation = getOperationInMapByIndex(currentOperationID);
+            results.put(currentOperation, Integer.valueOf(answer.getText().toString()));
         }
 
         if(v == previousButton){
@@ -116,22 +99,22 @@ public class OperationActivity<T extends Operation> extends AppCompatActivity im
 
     /* UTILS METHODS */
 
-    private Addition getAdditionInMapByIndex(int index){
-        return (Addition) this.results.keySet().toArray()[index];
+    private Operation getOperationInMapByIndex(int index){
+        return (Operation) this.results.keySet().toArray()[index];
     }
 
-    private String getAdditionQuestionById(int id){
-        return getAdditionInMapByIndex(id).getOperande1() + " + " + getAdditionInMapByIndex(id).getOperande2() + " = ";
+    private String getOperationQuestionById(int id){
+        return getOperationInMapByIndex(id).getOperand1() + " " + getOperationInMapByIndex(id).getOperationCharacter() + " " + getOperationInMapByIndex(id).getOperand2() + " = ";
     }
 
     private void updateDisplay(){
         operationID.setText((currentOperationID +1)  + " /10");
-        question.setText(getAdditionQuestionById(currentOperationID));
-        if(results.get(getAdditionInMapByIndex(currentOperationID)) == -1){
+        question.setText(getOperationQuestionById(currentOperationID));
+        if(results.get(getOperationInMapByIndex(currentOperationID)) == -1){
             answer.setText("");
             answer.setHint("?");
         }else{
-            answer.setText(results.get(getAdditionInMapByIndex(currentOperationID)).toString());
+            answer.setText(results.get(getOperationInMapByIndex(currentOperationID)).toString());
         }
 
         if(currentOperationID == 9){
@@ -143,8 +126,8 @@ public class OperationActivity<T extends Operation> extends AppCompatActivity im
 
     private void checkWin(){
         int goodAnswer = 0;
-        for(Addition addition : results.keySet()){
-            if(addition.getResultat() == results.get(addition)) goodAnswer++;
+        for(Operation op : results.keySet()){
+            if(op.getResult() == results.get(op)) goodAnswer++;
         }
 
         Intent intent = new Intent(OperationActivity.this, ResultActivity.class);

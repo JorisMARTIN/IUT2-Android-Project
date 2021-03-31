@@ -1,9 +1,9 @@
-package fr.nezanmartin.lecoledesloustics.mathematics.operation;
+package fr.nezanmartin.lecoledesloustics.mathematics.model;
 
 public class Division extends Operation {
 
-    public Division(int operand1, int operand2) {
-        super(operand1, operand2);
+    public Division(int difficulty) {
+        super(difficulty);
         this.operationCharacter = '/';
     }
 

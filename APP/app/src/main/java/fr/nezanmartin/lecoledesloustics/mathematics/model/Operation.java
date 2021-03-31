@@ -1,16 +1,34 @@
-package fr.nezanmartin.lecoledesloustics.mathematics.operation;
+package fr.nezanmartin.lecoledesloustics.mathematics.model;
+
+import java.util.Random;
 
 public abstract class Operation {
+
+    private int difficulty;
 
     private int operand1;
     private int operand2;
 
     protected char operationCharacter;
 
-    public Operation(int operand1, int operand2){
-        this.operand1 = operand1;
-        this.operand2 = operand2;
+    public Operation(int difficulty){
+        this.difficulty = difficulty;
+
+        Random random = new Random();
+
+        if(difficulty == 1){
+            this.operand1 = random.nextInt(9-1) + 1;
+            this.operand2 = random.nextInt(9-1) + 1;
+        }else if(difficulty == 2){
+            this.operand1 = random.nextInt(9-1) + 1;
+            this.operand2 = random.nextInt(99-10) + 10;
+        }else{
+            this.operand1 = random.nextInt(99-10) + 10;
+            this.operand2 = random.nextInt(99-10) + 10;
+        }
     }
+
+    public int getDifficulty(){ return this.difficulty; }
 
     public int getOperand1(){ return  this.operand1; }
 
