@@ -16,20 +16,21 @@ import java.util.Random;
 
 import fr.nezanmartin.lecoledesloustics.R;
 import fr.nezanmartin.lecoledesloustics.mathematics.ResultActivity;
-import fr.nezanmartin.lecoledesloustics.mathematics.addition.model.Addition;
+import fr.nezanmartin.lecoledesloustics.mathematics.operation.Addition;
+import fr.nezanmartin.lecoledesloustics.mathematics.operation.Operation;
 
-public class AdditionActivity extends AppCompatActivity implements View.OnClickListener{
+public class OperationActivity<T extends Operation> extends AppCompatActivity implements View.OnClickListener{
 
     //DATA
     int difficulty = 1; //TODO: getDifficulty from previous activity
 
-    int currentAdditionID;
-    LinkedHashMap<Addition, Integer> results;
+    int currentOperationID;
+    LinkedHashMap<T, Integer> results;
 
     //VIEW
-    LinearLayout additonContainner;
+    LinearLayout operationContainner;
 
-    TextView additionID, question;
+    TextView operationID, question;
     EditText answer;
 
     Button previousButton, nextButton, validate;
@@ -39,9 +40,9 @@ public class AdditionActivity extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_addition);
 
-        additonContainner = findViewById(R.id.addition_container);
+        operationContainner = findViewById(R.id.addition_container);
 
-        additionID = findViewById(R.id.addition_id);
+        operationID = findViewById(R.id.addition_id);
 
         question = findViewById(R.id.addition_question);
         answer = findViewById(R.id.addition_answer);
@@ -52,9 +53,9 @@ public class AdditionActivity extends AppCompatActivity implements View.OnClickL
 
         results = new LinkedHashMap<>();
 
-        initAdditions();
+        initOperation();
 
-        currentAdditionID = 0;
+        currentOperationID = 0;
         updateDisplay();
 
         previousButton.setOnClickListener(this);
@@ -64,29 +65,29 @@ public class AdditionActivity extends AppCompatActivity implements View.OnClickL
 
     }
 
-    private void initAdditions() {
+    private void initOperation() {
         Random random = new Random();
-        Addition addition;
-        int operande1, operande2;
+        T operation;
+        int operand1, operand2;
 
 
         for(int id=0; id<10; id++){
 
             if(difficulty == 1){
-                operande1 = random.nextInt(9-1) + 1;
-                operande2 = random.nextInt(9-1) + 1;
+                operand1 = random.nextInt(9-1) + 1;
+                operand2 = random.nextInt(9-1) + 1;
             }else if(difficulty == 2){
-                operande1 = random.nextInt(9-1) + 1;
-                operande2 = random.nextInt(99-10) + 10;
+                operand1 = random.nextInt(9-1) + 1;
+                operand2 = random.nextInt(99-10) + 10;
             }else{
-                operande1 = random.nextInt(99-10) + 10;
-                operande2 = random.nextInt(99-10) + 10;
+                operand1 = random.nextInt(99-10) + 10;
+                operand2 = random.nextInt(99-10) + 10;
             }
 
-            addition = new Addition(operande1, operande2);
+            operation = new Operation(operand1, operand2);
 
             //Hash map Addition object, addition answer
-            results.put(addition, -1);
+            results.put(operation, -1);
         }
     }
 
@@ -95,14 +96,14 @@ public class AdditionActivity extends AppCompatActivity implements View.OnClickL
 
         Addition currentAddition;
         if(!TextUtils.isEmpty(answer.getText())){
-            currentAddition = getAdditionInMapByIndex(currentAdditionID);
+            currentAddition = getAdditionInMapByIndex(currentOperationID);
             results.put(currentAddition, Integer.valueOf(answer.getText().toString()));
         }
 
         if(v == previousButton){
-            if(currentAdditionID >= 1) currentAdditionID--;
+            if(currentOperationID >= 1) currentOperationID--;
         }else if(v == nextButton){
-            if(currentAdditionID <= 8) currentAdditionID++;
+            if(currentOperationID <= 8) currentOperationID++;
         }
         updateDisplay();
 
@@ -124,16 +125,16 @@ public class AdditionActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void updateDisplay(){
-        additionID.setText((currentAdditionID+1)  + " /10");
-        question.setText(getAdditionQuestionById(currentAdditionID));
-        if(results.get(getAdditionInMapByIndex(currentAdditionID)) == -1){
+        operationID.setText((currentOperationID +1)  + " /10");
+        question.setText(getAdditionQuestionById(currentOperationID));
+        if(results.get(getAdditionInMapByIndex(currentOperationID)) == -1){
             answer.setText("");
             answer.setHint("?");
         }else{
-            answer.setText(results.get(getAdditionInMapByIndex(currentAdditionID)).toString());
+            answer.setText(results.get(getAdditionInMapByIndex(currentOperationID)).toString());
         }
 
-        if(currentAdditionID == 9){
+        if(currentOperationID == 9){
             validate.setVisibility(View.VISIBLE);
         }else{
             validate.setVisibility(View.INVISIBLE);
@@ -146,7 +147,7 @@ public class AdditionActivity extends AppCompatActivity implements View.OnClickL
             if(addition.getResultat() == results.get(addition)) goodAnswer++;
         }
 
-        Intent intent = new Intent(AdditionActivity.this, ResultActivity.class);
+        Intent intent = new Intent(OperationActivity.this, ResultActivity.class);
         intent.putExtra(ResultActivity.SCORE_KEY, goodAnswer);
 
         startActivity(intent);
