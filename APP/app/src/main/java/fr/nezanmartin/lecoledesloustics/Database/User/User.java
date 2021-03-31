@@ -16,7 +16,7 @@ public class User implements Serializable {
     private String name;
 
     @ColumnInfo(name = "firstname")
-    private String fistname;
+    private String firstname;
 
     @ColumnInfo(name = "current_user")
     private boolean isCurrentUser;
@@ -37,12 +37,12 @@ public class User implements Serializable {
         this.name = name;
     }
 
-    public String getFistname() {
-        return fistname;
+    public String getFirstname() {
+        return firstname;
     }
 
-    public void setFistname(String fistname) {
-        this.fistname = fistname;
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
     }
 
     public boolean isCurrentUser(){
