@@ -15,6 +15,7 @@ import java.util.List;
 
 import fr.nezanmartin.lecoledesloustics.Database.DatabaseClient;
 import fr.nezanmartin.lecoledesloustics.Database.User.User;
+import fr.nezanmartin.lecoledesloustics.mathematics.OperationActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -143,7 +144,7 @@ public class MainActivity extends AppCompatActivity {
                 super.onPostExecute(user);
 
                 //Create intent
-                Intent levelSelect = new Intent(MainActivity.this, LevelSelect.class);
+                Intent levelSelect = new Intent(MainActivity.this, OperationActivity.class);
                 startActivity(levelSelect);
             }
 

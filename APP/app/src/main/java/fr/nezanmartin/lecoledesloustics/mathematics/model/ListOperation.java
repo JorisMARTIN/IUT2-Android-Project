@@ -7,9 +7,9 @@ public class ListOperation {
 
     private int difficulty;
     private ArrayList<Operation> operations;
-    private String operation;
+    private Operations operation;
 
-    public ListOperation(int difficulty, String operation){
+    public ListOperation(int difficulty, Operations operation){
         this.difficulty = difficulty;
         this.operations = new ArrayList<>();
         this.operation = operation;
@@ -20,14 +20,14 @@ public class ListOperation {
     private void initOperation() {
         for(int i=0; i<10; i++){
 
-            if(this.operation.equalsIgnoreCase("Addition")){
+            if(this.operation == Operations.ADDITION){
                 this.operations.add(new Addition(this.difficulty));
-            }else if(this.operation.equalsIgnoreCase("Multiplication")){
+            }else if(this.operation == Operations.MULTIPLICATION){
                 this.operations.add(new Multiplication(this.difficulty));
-            }else if(this.operation.equalsIgnoreCase("Division")){
+            }else if(this.operation == Operations.DIVISION){
                 this.operations.add(new Division(this.difficulty));
-            }else if(this.operation.equalsIgnoreCase("Soustraction")){
-                this.operations.add(new Sosutraction(this.difficulty));
+            }else if(this.operation == Operations.SOUSTRACTION){
+                this.operations.add(new Soustraction(this.difficulty));
             }
 
         }
@@ -37,6 +37,6 @@ public class ListOperation {
 
     public int getDifficulty(){ return this.difficulty; }
 
-    public String getOperation(){ return this.operation; }
+    public Operations getOperation(){ return this.operation; }
 
 }
