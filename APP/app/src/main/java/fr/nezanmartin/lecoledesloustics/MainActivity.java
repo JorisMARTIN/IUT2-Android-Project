@@ -152,4 +152,9 @@ public class MainActivity extends AppCompatActivity {
         SaveCurrentUser save = new SaveCurrentUser();
         save.execute();
     }
+
+    public void newUser(View view) {
+        Intent newUser = new Intent(MainActivity.this, NewProfileActivity.class);
+        startActivity(newUser);
+    }
 }

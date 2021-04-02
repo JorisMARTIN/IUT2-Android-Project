@@ -8,4 +8,8 @@
     <string name="userimage">Image de profil</string>
     <string name="Validate_text">Valider</string>
     <string name="Back_text">Retour</string>
+    <string name="mainActiCreateProfile">Créer un profil</string>
+    <string name="actNewProfileTitle">Créer un nouveau profil</string>
+    <string name="actNewProfileNamePlaceholder">Votre nom</string>
+    <string name="actNewProfileFirstnamePlaceholder">Votre prénom</string>
 </resources>
