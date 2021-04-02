@@ -15,4 +15,12 @@ public enum Operations {
 
     public String getMessage(){ return this.message; }
 
+    public static Operations getOperationFromName(String name){
+        if(name.equalsIgnoreCase("addition")) return ADDITION;
+        else if(name.equalsIgnoreCase("soustraction")) return SOUSTRACTION;
+        else if(name.equalsIgnoreCase("multiplication")) return MULTIPLICATION;
+        else if(name.equalsIgnoreCase("division")) return DIVISION;
+        else return null;
+    }
+
 }

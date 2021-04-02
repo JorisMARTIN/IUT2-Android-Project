@@ -21,6 +21,9 @@ import fr.nezanmartin.lecoledesloustics.Database.Game.Game;
 import fr.nezanmartin.lecoledesloustics.Database.Game.GameDAO;
 import fr.nezanmartin.lecoledesloustics.Database.Level.Level;
 import fr.nezanmartin.lecoledesloustics.Database.Level.LevelDAO;
+import fr.nezanmartin.lecoledesloustics.mathematics.OperationActivity;
+import fr.nezanmartin.lecoledesloustics.mathematics.model.Operation;
+import fr.nezanmartin.lecoledesloustics.mathematics.model.Operations;
 import fr.nezanmartin.lecoledesloustics.utils.Pair;
 
 public class LevelSelect extends AppCompatActivity {
@@ -34,7 +37,6 @@ public class LevelSelect extends AppCompatActivity {
         setContentView(R.layout.activity_level_select);
 
         database = DatabaseClient.getInstance(getApplicationContext());
-
         getLevels();
     }
 
@@ -86,7 +88,7 @@ public class LevelSelect extends AppCompatActivity {
         LayoutInflater inflater = getLayoutInflater();
         LinearLayout levelSelectArea = findViewById(R.id.level_select_area);
 
-        for (Map.Entry<String, Pair<List<Level>, List<Game>>> entry: allLevels.entrySet()) {
+        for (Map.Entry<String, Pair<List<Level>, List<Game>>> entry : allLevels.entrySet()) {
             LinearLayout levelActivity = (LinearLayout) inflater.inflate(R.layout.component_level_activity, null);
 
             TextView levelActivityName = levelActivity.findViewById(R.id.level_activity_name);
@@ -98,6 +100,20 @@ public class LevelSelect extends AppCompatActivity {
                 LinearLayout levelButton = (LinearLayout) inflater.inflate(R.layout.component_level_button, null);
                 Button levelButtonButton = levelButton.findViewById(R.id.level_button_button);
                 levelButtonButton.setText(String.valueOf(level.getDifficulty()));
+
+                levelButtonButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        Intent intent = new Intent(LevelSelect.this, OperationActivity.class);
+                        intent.putExtra(OperationActivity.DIFFICULTY_KEY, level.getDifficulty());
+                        intent.putExtra(OperationActivity.OPERATION_KEY, level.getGameMode());
+
+                        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+
+                        startActivity(intent);
+                    }
+                });
 
                 RatingBar levelButtonScore = levelButton.findViewById(R.id.level_button_score);
                 levelButtonScore.setRating((float) 0);

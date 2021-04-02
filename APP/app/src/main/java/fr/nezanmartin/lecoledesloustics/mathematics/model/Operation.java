@@ -18,7 +18,7 @@ public abstract class Operation {
 
         if(difficulty == 1){
             this.operand1 = random.nextInt(9-1) + 1;
-            this.operand2 = random.nextInt(this.operand1-1) + 1;
+            this.operand2 = random.nextInt(Math.max(this.operand1-1, 1)) + 1;
         }else if(difficulty == 2){
             this.operand1 = random.nextInt(9-1) + 1;
             this.operand2 = random.nextInt(99-10) + 10;

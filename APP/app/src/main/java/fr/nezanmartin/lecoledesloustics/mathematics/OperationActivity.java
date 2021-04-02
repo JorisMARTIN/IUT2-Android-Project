@@ -20,9 +20,12 @@ import fr.nezanmartin.lecoledesloustics.mathematics.model.Operations;
 
 public class OperationActivity extends AppCompatActivity implements View.OnClickListener{
 
+    public static final String OPERATION_KEY = "operation_key";
+    public static final String DIFFICULTY_KEY = "difficulty_key";
+
     //DATA
-    int difficulty = 1; //TODO: getDifficulty from previous activity
-    Operations operation = Operations.DIVISION; //TODO: getOperation from previous activity
+    int difficulty;
+    Operations operation;
 
     ListOperation operations;
 
@@ -42,6 +45,7 @@ public class OperationActivity extends AppCompatActivity implements View.OnClick
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_operation);
 
+        /* Initialise all view */
         operationContainner = findViewById(R.id.operation_container);
 
         operationTitle = findViewById(R.id.operation_title);
@@ -53,6 +57,10 @@ public class OperationActivity extends AppCompatActivity implements View.OnClick
         previousButton = findViewById(R.id.operation_previous_button);
         nextButton = findViewById(R.id.operation_next_button);
         validate = findViewById(R.id.operation_confirm);
+
+        /* Initialise all datas */
+        difficulty = getIntent().getIntExtra(DIFFICULTY_KEY, 1);
+        operation = Operations.getOperationFromName(getIntent().getStringExtra(OPERATION_KEY));
 
         operations = new ListOperation(difficulty, operation);
 
@@ -118,11 +126,10 @@ public class OperationActivity extends AppCompatActivity implements View.OnClick
             answer.setText(results.get(getOperationInMapByIndex(currentOperationID)).toString());
         }
 
-        if(currentOperationID == 9){
-            validate.setVisibility(View.VISIBLE);
-        }else{
-            validate.setVisibility(View.INVISIBLE);
-        }
+        validate.setVisibility((currentOperationID == 9) ? View.VISIBLE : View.INVISIBLE);
+        nextButton.setVisibility((currentOperationID == 9 ? View.INVISIBLE : View.VISIBLE));
+        previousButton.setVisibility((currentOperationID == 0 ? View.INVISIBLE : View.VISIBLE));
+
     }
 
     private void checkWin(){
