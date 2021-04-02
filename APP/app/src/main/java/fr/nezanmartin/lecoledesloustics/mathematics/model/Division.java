@@ -8,7 +8,5 @@ public class Division extends Operation {
     }
 
     @Override
-    public int getResult() {
-        return 0;
-    }
+    public int getResult() { return Math.round(getOperand1() / getOperand2()); }
 }

@@ -1,14 +1,14 @@
 package fr.nezanmartin.lecoledesloustics.mathematics.model;
 
-public class Sosutraction extends Operation {
+public class Soustraction extends Operation {
 
-    public Sosutraction(int difficulty) {
+    public Soustraction(int difficulty) {
         super(difficulty);
         this.operationCharacter = '-';
     }
 
     @Override
     public int getResult() {
-        return 0;
+        return getOperand1() - getOperand2();
     }
 }

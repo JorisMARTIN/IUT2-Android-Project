@@ -16,12 +16,13 @@ import java.util.LinkedHashMap;
 import fr.nezanmartin.lecoledesloustics.R;
 import fr.nezanmartin.lecoledesloustics.mathematics.model.ListOperation;
 import fr.nezanmartin.lecoledesloustics.mathematics.model.Operation;
+import fr.nezanmartin.lecoledesloustics.mathematics.model.Operations;
 
 public class OperationActivity extends AppCompatActivity implements View.OnClickListener{
 
     //DATA
     int difficulty = 1; //TODO: getDifficulty from previous activity
-    String operationName = "addition"; //TODO: getName from presvious activity
+    Operations operation = Operations.DIVISION; //TODO: getOperation from previous activity
 
     ListOperation operations;
 
@@ -53,9 +54,9 @@ public class OperationActivity extends AppCompatActivity implements View.OnClick
         nextButton = findViewById(R.id.operation_next_button);
         validate = findViewById(R.id.operation_confirm);
 
-        operationTitle.setText("Résoud les " + this.operationName + "s suivantes :");
+        operations = new ListOperation(difficulty, operation);
 
-        operations = new ListOperation(difficulty, operationName);
+        operationTitle.setText(operations.getOperation().getMessage());
 
         results = new LinkedHashMap<>();
 

@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import fr.nezanmartin.lecoledesloustics.LevelSelect;
+import fr.nezanmartin.lecoledesloustics.MainActivity;
 import fr.nezanmartin.lecoledesloustics.R;
 
 public class ResultActivity extends AppCompatActivity {
@@ -47,7 +48,7 @@ public class ResultActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ResultActivity.this, LevelSelect.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }
         });
