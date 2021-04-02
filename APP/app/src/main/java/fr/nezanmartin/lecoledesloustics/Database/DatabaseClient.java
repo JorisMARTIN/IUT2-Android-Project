@@ -50,6 +50,8 @@ public class DatabaseClient {
         public void onCreate(@NonNull SupportSQLiteDatabase db) {
             super.onCreate(db);
 
+            db.execSQL("INSERT INTO game (user_id, level_id, score) VALUES (0, 0, 3.0)");
+
             // db.execSQL("INSERT INTO user (name, firstname, current_user) VALUES(\"Bob\", \"loustic\", 0);");
             // db.execSQL("INSERT INTO user (name, firstname, current_user) VALUES(\"Marie\", \"lousticette\", 0);");
         }

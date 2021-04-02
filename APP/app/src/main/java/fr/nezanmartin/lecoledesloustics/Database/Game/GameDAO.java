@@ -1,12 +1,29 @@
 package fr.nezanmartin.lecoledesloustics.Database.Game;
 
 import androidx.room.Dao;
+import androidx.room.Delete;
+import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import java.util.List;
 
+import fr.nezanmartin.lecoledesloustics.Database.User.User;
+
 @Dao
 public interface GameDAO {
-    @Query("SELECT * from Game WHERE user_id = (:userId)")
-    List<Game> getUserGames(int userId);
+    @Query("SELECT g.* from Game g, User u WHERE g.user_id = u.id AND u.current_user == 1")
+    List<Game> getCurrentUserGames();
+
+    @Insert
+    void insert(User user);
+
+    @Insert
+    long[] insertAll(User... users);
+
+    @Delete
+    void delete(User user);
+
+    @Update
+    void update(User user);
 }

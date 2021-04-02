@@ -17,14 +17,16 @@ import java.util.List;
 import java.util.Map;
 
 import fr.nezanmartin.lecoledesloustics.Database.DatabaseClient;
+import fr.nezanmartin.lecoledesloustics.Database.Game.Game;
+import fr.nezanmartin.lecoledesloustics.Database.Game.GameDAO;
 import fr.nezanmartin.lecoledesloustics.Database.Level.Level;
 import fr.nezanmartin.lecoledesloustics.Database.Level.LevelDAO;
-import fr.nezanmartin.lecoledesloustics.Database.User.User;
+import fr.nezanmartin.lecoledesloustics.utils.Pair;
 
 public class LevelSelect extends AppCompatActivity {
 
     private DatabaseClient database;
-    HashMap<String, List<Level>> allLevels;
+    HashMap<String, Pair<List<Level>, List<Game>> > allLevels;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,26 +43,33 @@ public class LevelSelect extends AppCompatActivity {
         /**
          * Création d'une classe asynchrone pour récuperer les utilisateurs
          */
-        class CollectLevels extends AsyncTask<Void, Void, HashMap<String, List<Level>>> {
+        class CollectLevels extends AsyncTask<Void, Void, HashMap<String, Pair<List<Level>, List<Game>>>> {
 
             @Override
-            protected HashMap<String, List<Level>> doInBackground(Void... voids) {
-                LevelDAO dao = database.getAppDatabase().levelDAO();
+            protected HashMap<String, Pair<List<Level>, List<Game>> > doInBackground(Void... voids) {
+                LevelDAO levelDAO = database.getAppDatabase().levelDAO();
+                GameDAO gameDAO = database.getAppDatabase().gameDAO();
 
                 // getting users
-                List<String> activities = dao.getActivities();
+                List<String> activities = levelDAO.getActivities();
 
-                HashMap<String, List<Level>> levels = new HashMap<>();
+                HashMap<String, Pair<List<Level>, List<Game>>> levels = new HashMap<>();
 
                 for (String activity: activities) {
-                    levels.put(activity, dao.getLevels(activity));
+                    levels.put(
+                        activity,
+                        new Pair<>(
+                            levelDAO.getLevels(activity),
+                            gameDAO.getCurrentUserGames()
+                        )
+                    );
                 }
 
                 return levels;
             }
 
             @Override
-            protected void onPostExecute(HashMap<String, List<Level>> levels){
+            protected void onPostExecute(HashMap<String, Pair<List<Level>, List<Game>> > levels){
                 super.onPostExecute(levels);
 
                 allLevels = levels;
@@ -77,7 +86,7 @@ public class LevelSelect extends AppCompatActivity {
         LayoutInflater inflater = getLayoutInflater();
         LinearLayout levelSelectArea = findViewById(R.id.level_select_area);
 
-        for (Map.Entry<String, List<Level>> entry: allLevels.entrySet()) {
+        for (Map.Entry<String, Pair<List<Level>, List<Game>>> entry: allLevels.entrySet()) {
             LinearLayout levelActivity = (LinearLayout) inflater.inflate(R.layout.component_level_activity, null);
 
             TextView levelActivityName = levelActivity.findViewById(R.id.level_activity_name);
@@ -85,13 +94,19 @@ public class LevelSelect extends AppCompatActivity {
 
             LinearLayout levelActivityArea = levelActivity.findViewById(R.id.level_activity_layout);
 
-            for (Level level: entry.getValue()) {
+            for (Level level: entry.getValue().getItem1()) {
                 LinearLayout levelButton = (LinearLayout) inflater.inflate(R.layout.component_level_button, null);
                 Button levelButtonButton = levelButton.findViewById(R.id.level_button_button);
                 levelButtonButton.setText(String.valueOf(level.getDifficulty()));
 
                 RatingBar levelButtonScore = levelButton.findViewById(R.id.level_button_score);
-                levelButtonScore.setRating((float) 0.5); // TODO: fetch score from GameDAO
+                levelButtonScore.setRating((float) 0);
+
+                for (Game game: entry.getValue().getItem2()) {
+                    if (game.getLevelId() == level.getId()) {
+                        levelButtonScore.setRating(game.getScore());
+                    }
+                }
 
                 levelActivityArea.addView(levelButton);
             }
