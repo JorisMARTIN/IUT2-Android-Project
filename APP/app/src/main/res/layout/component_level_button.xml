@@ -15,9 +15,9 @@
 
     <RatingBar
         android:id="@+id/level_button_score"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:isIndicator="true"
-        android:numStars="3"
-        />
+        android:layout_gravity="center"
+        android:numStars="3" />
 </LinearLayout>
