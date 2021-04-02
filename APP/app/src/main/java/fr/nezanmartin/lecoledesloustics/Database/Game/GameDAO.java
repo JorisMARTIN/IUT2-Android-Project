@@ -15,6 +15,9 @@ public interface GameDAO {
     @Query("SELECT g.* from Game g, User u WHERE g.user_id = u.id AND u.current_user == 1")
     List<Game> getCurrentUserGames();
 
+    @Query("SELECT g.* from Game g, Level l WHERE l.id = (:level_id) AND g.level_id = l.id LIMIT 1")
+    Game getLevelGame(int level_id);
+
     @Insert
     void insert(User user);
 
