@@ -13,16 +13,17 @@ import fr.nezanmartin.lecoledesloustics.LevelSelect;
 import fr.nezanmartin.lecoledesloustics.MainActivity;
 import fr.nezanmartin.lecoledesloustics.R;
 
-public class ResultActivity extends AppCompatActivity {
+public class ResultActivity extends AppCompatActivity implements View.OnClickListener {
 
     public static final String SCORE_KEY = "score_key";
+    public static final String FINAL_SCORE_KEY = "final_score_key";
 
     //DATA
-    int score;
+    int score, finalScore;
 
     //VIEW
     TextView message, scoreMessage;
-    Button backButton;
+    Button correctionButton, backButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +34,7 @@ public class ResultActivity extends AppCompatActivity {
         scoreMessage = findViewById(R.id.result_score);
 
         score = getIntent().getIntExtra(SCORE_KEY, 0);
+        finalScore = getIntent().getIntExtra(FINAL_SCORE_KEY, 0);
 
         if(score == 10){
             message.setText("Félicitation !\nVotre score : ");
@@ -41,17 +43,27 @@ public class ResultActivity extends AppCompatActivity {
         }
         scoreMessage.setText(score + " /10");
 
+        correctionButton = findViewById(R.id.result_correction_button);
+        correctionButton.setOnClickListener(this);
+
+
         backButton = findViewById(R.id.result_return_button);
+        backButton.setOnClickListener(this);
 
-        backButton.setOnClickListener(new View.OnClickListener(){
+    }
 
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ResultActivity.this, LevelSelect.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-            }
-        });
+    @Override
+    public void onClick(View v) {
+        if(v == correctionButton){
+            setResult(RESULT_CANCELED);
+        }else if(v == backButton){
 
+            //TODO: Save finalScore in DB
+
+            setResult(RESULT_OK);
+
+        }
+
+        finish();
     }
 }

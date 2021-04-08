@@ -26,7 +26,25 @@
                 android:id="@+id/level_select_area"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" />
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/categorieSelectionTitle"
+                    android:gravity="center"
+                    android:textSize="20dp"
+                    android:layout_marginTop="10dp"/>
+
+                <Button
+                    android:id="@+id/level_select_mathematics_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/mathematicsTitle"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"/>
+
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 

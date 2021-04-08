@@ -1,5 +1,6 @@
 package fr.nezanmartin.lecoledesloustics.mathematics;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -22,8 +23,11 @@ public class OperationActivity extends AppCompatActivity implements View.OnClick
 
     public static final String OPERATION_KEY = "operation_key";
     public static final String DIFFICULTY_KEY = "difficulty_key";
+    private static final int OPERATION_REQUEST = 0;
 
     //DATA
+    boolean isCorrection = false; //Boolean for determine if the activity is in correction mode or not
+    int finalScore;
     int difficulty;
     Operations operation;
 
@@ -124,6 +128,11 @@ public class OperationActivity extends AppCompatActivity implements View.OnClick
             answer.setHint("?");
         }else{
             answer.setText(results.get(getOperationInMapByIndex(currentOperationID)).toString());
+            if(isCorrection && results.get(getOperationInMapByIndex(currentOperationID)) != getOperationInMapByIndex(currentOperationID).getResult()){
+                answer.setTextColor(0xFFFF0000);
+            }else{
+                answer.setTextColor(0xFF000000);
+            }
         }
 
         validate.setVisibility((currentOperationID == 9) ? View.VISIBLE : View.INVISIBLE);
@@ -132,16 +141,30 @@ public class OperationActivity extends AppCompatActivity implements View.OnClick
 
     }
 
-    private void checkWin(){
+    private void checkWin() {
         int goodAnswer = 0;
-        for(Operation op : results.keySet()){
-            if(op.getResult() == results.get(op)) goodAnswer++;
+        for (Operation op : results.keySet()) {
+            if (op.getResult() == results.get(op)) goodAnswer++;
         }
+
+        if(!isCorrection) finalScore = goodAnswer;
 
         Intent intent = new Intent(OperationActivity.this, ResultActivity.class);
         intent.putExtra(ResultActivity.SCORE_KEY, goodAnswer);
+        intent.putExtra(ResultActivity.FINAL_SCORE_KEY, finalScore);
 
-        startActivity(intent);
+        startActivityForResult(intent, OPERATION_REQUEST);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == OPERATION_REQUEST){
+            if(resultCode == RESULT_OK) finish();
+            else{
+                isCorrection = true;
+                updateDisplay();
+            }
+        }
+    }
 }
