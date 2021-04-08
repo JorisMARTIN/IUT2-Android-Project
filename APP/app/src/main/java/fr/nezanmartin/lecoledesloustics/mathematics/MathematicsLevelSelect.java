@@ -41,9 +41,6 @@ public class MathematicsLevelSelect extends AppCompatActivity {
 
     private void getLevels() {
 
-        /**
-         * Création d'une classe asynchrone pour récuperer les utilisateurs
-         */
         class CollectLevels extends AsyncTask<Void, Void, HashMap<String, Pair<List<Level>, List<Game>>>> {
 
             @Override
