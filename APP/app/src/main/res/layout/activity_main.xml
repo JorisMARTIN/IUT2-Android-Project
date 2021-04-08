@@ -30,25 +30,28 @@
             android:gravity="center"
             android:textSize="20sp"/>
 
-        <LinearLayout
-            android:id="@+id/activity_main_profiles_scroll"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
+            android:layout_height="250dp">
 
-            <!-- Load users profiles by inflate of component_user_profile.xml -->
+            <LinearLayout
+                android:id="@+id/activity_main_profiles_scroll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-        </LinearLayout>
+                <!-- Load users profiles by inflate of component_user_profile.xml -->
+
+            </LinearLayout>
+        </ScrollView>
 
         <Button
             android:id="@+id/activity_main_create_profile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/mainActiCreateProfile"
-            android:layout_marginTop="20dp"
             android:layout_gravity="center"
-            android:onClick="newUser"
-            />
+            android:onClick="newUser" />
     </LinearLayout>
+
 </LinearLayout>

@@ -24,9 +24,7 @@ public class Game implements Serializable {
     @ColumnInfo(name = "score")
     private float score;
 
-    public int getId() {
-        return id;
-    }
+    public int getId() { return id; }
 
     public int getUserId() {
         return userId;
