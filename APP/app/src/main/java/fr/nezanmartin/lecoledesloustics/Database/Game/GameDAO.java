@@ -15,18 +15,18 @@ public interface GameDAO {
     @Query("SELECT g.* from Game g, User u WHERE g.user_id = u.id AND u.current_user == 1")
     List<Game> getCurrentUserGames();
 
-    @Query("SELECT g.* from Game g, Level l WHERE l.id = (:level_id) AND g.level_id = l.id LIMIT 1")
-    Game getLevelGame(int level_id);
+    @Query("SELECT g.* from Game g, Level l WHERE l.id = (:level_id) AND g.level_id = l.id AND g.user_id=(:user_id) LIMIT 1")
+    Game getLevelGame(int user_id, int level_id);
 
     @Insert
-    void insert(User user);
+    void insert(Game game);
 
     @Insert
-    long[] insertAll(User... users);
+    long[] insertAll(Game... games);
 
     @Delete
-    void delete(User user);
+    void delete(Game game);
 
     @Update
-    void update(User user);
+    void update(Game game);
 }

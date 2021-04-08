@@ -4,6 +4,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -12,20 +13,30 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.List;
 
+import fr.nezanmartin.lecoledesloustics.Database.DatabaseClient;
+import fr.nezanmartin.lecoledesloustics.Database.Game.Game;
+import fr.nezanmartin.lecoledesloustics.Database.Game.GameDAO;
+import fr.nezanmartin.lecoledesloustics.Database.Level.Level;
+import fr.nezanmartin.lecoledesloustics.Database.User.UserDAO;
 import fr.nezanmartin.lecoledesloustics.R;
 import fr.nezanmartin.lecoledesloustics.mathematics.model.ListOperation;
 import fr.nezanmartin.lecoledesloustics.mathematics.model.Operation;
 import fr.nezanmartin.lecoledesloustics.mathematics.model.Operations;
+import fr.nezanmartin.lecoledesloustics.utils.Pair;
 
 public class OperationActivity extends AppCompatActivity implements View.OnClickListener{
 
     public static final String OPERATION_KEY = "operation_key";
     public static final String DIFFICULTY_KEY = "difficulty_key";
+    public static final String LEVEL_ID_KEY = "level_id_key";
     private static final int OPERATION_REQUEST = 0;
 
     //DATA
+    private DatabaseClient database;
     boolean isCorrection = false; //Boolean for determine if the activity is in correction mode or not
     int finalScore;
     int difficulty;
@@ -33,6 +44,7 @@ public class OperationActivity extends AppCompatActivity implements View.OnClick
 
     ListOperation operations;
 
+    int levelID;
     int currentOperationID;
     LinkedHashMap<Operation, Integer> results;
 
@@ -48,6 +60,7 @@ public class OperationActivity extends AppCompatActivity implements View.OnClick
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_operation);
+        database = DatabaseClient.getInstance(getApplicationContext());
 
         /* Initialise all view */
         operationContainner = findViewById(R.id.operation_container);
@@ -65,6 +78,7 @@ public class OperationActivity extends AppCompatActivity implements View.OnClick
         /* Initialise all datas */
         difficulty = getIntent().getIntExtra(DIFFICULTY_KEY, 1);
         operation = Operations.getOperationFromName(getIntent().getStringExtra(OPERATION_KEY));
+        levelID = getIntent().getIntExtra(LEVEL_ID_KEY, 0);
 
         operations = new ListOperation(difficulty, operation);
 
@@ -151,7 +165,6 @@ public class OperationActivity extends AppCompatActivity implements View.OnClick
 
         Intent intent = new Intent(OperationActivity.this, ResultActivity.class);
         intent.putExtra(ResultActivity.SCORE_KEY, goodAnswer);
-        intent.putExtra(ResultActivity.FINAL_SCORE_KEY, finalScore);
 
         startActivityForResult(intent, OPERATION_REQUEST);
     }
@@ -160,8 +173,30 @@ public class OperationActivity extends AppCompatActivity implements View.OnClick
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == OPERATION_REQUEST){
-            if(resultCode == RESULT_OK) finish();
-            else{
+            if (resultCode == RESULT_OK) {
+                /**
+                 * Stocker le score dans la BDD
+                 */
+                class SaveScore extends AsyncTask<Void, Void, Void> {
+
+                    @Override
+                    protected Void doInBackground(Void... voids) {
+
+
+                        return null;
+                    }
+
+                    @Override
+                    protected void onPostExecute(Void v) {
+                        super.onPostExecute(v);
+                        finish();
+                    }
+                }
+
+                SaveScore sc = new SaveScore();
+                sc.execute();
+                finish();
+            } else {
                 isCorrection = true;
                 updateDisplay();
             }

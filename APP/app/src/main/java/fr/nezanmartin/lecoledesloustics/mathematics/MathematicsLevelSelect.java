@@ -29,6 +29,7 @@ public class MathematicsLevelSelect extends AppCompatActivity {
 
     private DatabaseClient database;
     HashMap<String, Pair<List<Level>, List<Game>>> allLevels;
+    boolean invalidated;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +38,24 @@ public class MathematicsLevelSelect extends AppCompatActivity {
 
         database = DatabaseClient.getInstance(getApplicationContext());
         getLevels();
+
+        invalidated = false;
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        invalidated = true;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if (invalidated) {
+            recreate();
+        }
     }
 
     private void getLevels() {
@@ -107,6 +126,7 @@ public class MathematicsLevelSelect extends AppCompatActivity {
                         Intent intent = new Intent(MathematicsLevelSelect.this, OperationActivity.class);
                         intent.putExtra(OperationActivity.DIFFICULTY_KEY, level.getDifficulty());
                         intent.putExtra(OperationActivity.OPERATION_KEY, level.getGameMode());
+                        intent.putExtra(OperationActivity.LEVEL_ID_KEY, level.getId());
 
                         intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
 
