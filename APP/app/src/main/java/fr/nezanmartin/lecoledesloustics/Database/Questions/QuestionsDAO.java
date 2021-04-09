@@ -10,11 +10,14 @@ import androidx.room.Update;
 @Dao
 public interface QuestionsDAO {
 
-    @Query("SELECT * FROM questions")
+    @Query("SELECT * FROM question")
     List<Question> getAllQuestions();
 
-    @Query("SELECT * FROM questions WHERE tag = (:tag)")
+    @Query("SELECT * FROM question WHERE tag = (:tag)")
     List<Question> getQuestionsByTag(String tag);
+
+    @Query("SELECT DISTINCT tag FROM question")
+    List<String> getAllTags();
 
     @Insert
     void insert(Question question);

@@ -16,7 +16,7 @@ public class Question {
     @ColumnInfo(name = "answers")
     private String answers;
 
-    @ColumnInfo(name = "good_anwer")
+    @ColumnInfo(name = "good_answer")
     private int good_answer;
 
     @ColumnInfo(name = "tag")
@@ -38,7 +38,7 @@ public class Question {
         this.question = question;
     }
 
-    private String getAnswers() {
+    public String getAnswers() {
         return answers;
     }
 
@@ -48,7 +48,7 @@ public class Question {
 
     /**
      *
-     * @param answers Partern : "answer1, answer2, ..., answnerN"
+     * @param answers Patern : "answer1, answer2, answner3"
      */
     public void setAnswers(String answers) {
         this.answers = answers;

@@ -15,4 +15,7 @@
     <string name="mathematicsTitle">Les Mathématiques</string>
     <string name="categorieSelectionTitle">Quelle matière veux-tu travailler ?</string>
     <string name="resultCorrectionButtonText">Voir mes réponses</string>
+    <string name="QuestionsAnswersButtonTitle">Questions / Réponses</string>
+    <string name="QuestionsAnswersLevelSelectTitle">Questions / Réponses</string>
+    <string name="QuestionLabelText">Question :</string>
 </resources>

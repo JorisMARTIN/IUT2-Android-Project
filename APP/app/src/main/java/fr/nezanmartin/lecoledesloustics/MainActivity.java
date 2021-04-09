@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
         for(User user : allUsers){
 
             LinearLayout globalLayout = new LinearLayout(this);
-            globalLayout.setOrientation(LinearLayout.HORIZONTAL);
+            globalLayout.setOrientation(LinearLayout.VERTICAL);
             globalLayout.setGravity(Gravity.CENTER);
 
             LinearLayout layout = (LinearLayout) getLayoutInflater().inflate(R.layout.component_user_profil, null);

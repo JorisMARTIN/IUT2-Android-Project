@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.LécoleDesLoustics">
-        <activity android:name=".mathematics.MathematicsLevelSelect"></activity>
+        <activity android:name=".QuestionsAnswers.QuestionsAnswersActivity"></activity>
+        <activity android:name=".QuestionsAnswers.QuestionsAnswersLevelSelect" />
+        <activity android:name=".mathematics.MathematicsLevelSelect" />
         <activity android:name=".NewProfileActivity" />
         <activity android:name=".mathematics.ResultActivity" />
         <activity android:name=".mathematics.OperationActivity" />

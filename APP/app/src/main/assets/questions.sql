@@ -1,9 +1,9 @@
 CREATE TABLE questions (
     id INTEGER NOT NULL PRIMARY KEY,
-    question varchar(50) NOT NULL,
-    answers varchar(50) NOT NULL,
+    question TEXT NOT NULL,
+    answers TEXT NOT NULL,
     good_answer INTEGER NOT NULL, -- The index in the future array after parsing of answers --
-    tag varchar(20) NOT NULL
+    tag TEXT NOT NULL
 );
 
 INSERT INTO questions VALUES
@@ -23,7 +23,7 @@ INSERT INTO questions VALUES
 (14, "Quelle est la capitale de l'Algérie ?", "Alger, rie, Oran", 0, "Geographie"),
 (15, "Quelle est la capitale de l'Argentine ?", "Buenos-Aire, Cordoba, Mendoza", 0, "Geographie"),
 (16, "Quelle est la capitale du Brezil ?", "Rio-de-janeiro, Sao-Paulo, Brasilia", 2, "Geographie"),
-(17, "Quelle est la capitale de la Suisse ?", "Berne, Geneve, Zurich, Humm c'est compliqué", 3, "Geographie"),
+(17, "Quelle est la capitale du Maroc ?", "Casablanca, Marrakech, Rabat", 2, "Geographie"),
 (18, "Quelle est la capitale de la Tunisie ?", "Tunis, ie, Sfax", 0, "Geographie"),
 (19, "Quelle est la capitale du Mexique ?", "Monterrey, Mexico, Guadalajara", 1, "Geographie"),
 (20, "Quelle est la capitale du Canada ?", "Montréal, Ottawa, Toronto", 1, "Geographie");
