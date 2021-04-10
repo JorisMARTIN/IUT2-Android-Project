@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -93,6 +94,14 @@ public class OperationActivity extends AppCompatActivity implements View.OnClick
 
         currentOperationID = 0;
         updateDisplay();
+
+        answer.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                onClick(currentOperationID <= 8 ? nextButton : validate);
+                return false;
+            }
+        });
 
         previousButton.setOnClickListener(this);
         nextButton.setOnClickListener(this);
@@ -181,7 +190,24 @@ public class OperationActivity extends AppCompatActivity implements View.OnClick
 
                     @Override
                     protected Void doInBackground(Void... voids) {
+                        UserDAO userDAO = database.getAppDatabase().userDAO();
+                        GameDAO gameDAO = database.getAppDatabase().gameDAO();
 
+                        int userID = userDAO.getCurrentUser().getId();
+                        Game game = gameDAO.getLevelGame(userID, levelID);
+                        float score = (float) (finalScore * 0.3);
+
+
+                        if (game == null) {
+                            game = new Game();
+                            game.setUserId(userID);
+                            game.setLevelId(levelID);
+                            game.setScore(score);
+                            gameDAO.insert(game);
+                        } else {
+                            game.setScore(score);
+                            gameDAO.update(game);
+                        }
 
                         return null;
                     }
