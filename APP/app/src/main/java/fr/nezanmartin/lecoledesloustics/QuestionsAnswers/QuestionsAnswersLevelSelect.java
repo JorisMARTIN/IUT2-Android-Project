@@ -36,6 +36,7 @@ public class QuestionsAnswersLevelSelect extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_questions_answers_level_select);
+        database = DatabaseClient.getInstance(getApplicationContext());
 
         levelSelectArea = findViewById(R.id.questions_answers_level_select_area);
 
