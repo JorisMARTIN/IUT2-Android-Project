@@ -80,7 +80,7 @@ public class QuestionsAnswersActivity extends AppCompatActivity {
 
         tag = getIntent().getStringExtra(TAG_KEY);
 
-        /* Async class for collect questions */
+        /* Async class for collect questions all question from a specific tag */
         class CollectQuestions extends AsyncTask<Void, Void, List<Question>> {
 
             @Override
@@ -107,6 +107,7 @@ public class QuestionsAnswersActivity extends AppCompatActivity {
 
     private void updateLevel() {
 
+        // Reset feedback and color of every choices
         feedbackText.setText("");
         answer0.setTextColor(0xFF000000);
         answer1.setTextColor(0xFF000000);
@@ -146,6 +147,7 @@ public class QuestionsAnswersActivity extends AppCompatActivity {
 
     private void checkWin() {
 
+        // Check if one option is selected
         if(!(answer0.isChecked() || answer1.isChecked() || answer2.isChecked())){
             feedbackText.setText("Tu dois choisir une réponse avant de valider :)");
             return;
@@ -160,6 +162,7 @@ public class QuestionsAnswersActivity extends AppCompatActivity {
 
         int goodAnswer = level.getCurrentQuestion().getGood_answer();
 
+        // The good answer is selected
         if((answer0.isChecked() && goodAnswer == 0)
         || (answer1.isChecked() && goodAnswer == 1)
         || (answer2.isChecked() && goodAnswer == 2)){
@@ -189,6 +192,7 @@ public class QuestionsAnswersActivity extends AppCompatActivity {
 
         feedbackText.setTextColor(0xFF000000);
 
+        // Start a countdown to give a feedback on the answer
         new CountDownTimer(2500, 1000){
 
             @Override

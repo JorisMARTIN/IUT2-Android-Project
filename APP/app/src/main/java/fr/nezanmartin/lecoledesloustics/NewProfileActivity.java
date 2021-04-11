@@ -52,7 +52,7 @@ public class NewProfileActivity extends AppCompatActivity {
     private void addNewUser(User user) {
 
         /**
-         * Création d'une classe asynchrone pour récuperer les utilisateurs
+         * Création d'une classe asynchrone pour ajouter un nouvel utilisateur
          */
         class AddNewUser extends AsyncTask<Void, Void, Void> {
 

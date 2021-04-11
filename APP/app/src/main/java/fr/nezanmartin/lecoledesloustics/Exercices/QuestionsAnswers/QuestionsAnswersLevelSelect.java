@@ -34,7 +34,7 @@ public class QuestionsAnswersLevelSelect extends AppCompatActivity {
 
     // DATA
     List<String> allTags;
-    HashMap<String, Pair<Level, Game>> questionsAnswersLevels;
+    HashMap<String, Pair<Level, Game>> questionsAnswersLevels; //Map for link every Level with the player score
 
 
     @Override
@@ -73,32 +73,6 @@ public class QuestionsAnswersLevelSelect extends AppCompatActivity {
 
     private void initExercices() {
 
-        /*
-        class CollectTags extends AsyncTask<Void, Void, List<String>> {
-
-            @Override
-            protected List<String> doInBackground(Void... voids) {
-
-                List<String> tags = database.getAppDatabase().questionDAO().getAllTags();
-
-                return tags;
-            }
-
-            @Override
-            protected void onPostExecute(List<String> tags) {
-                super.onPostExecute(tags);
-
-                allTags = tags;
-                initView();
-            }
-        }
-
-        CollectTags collectTags = new CollectTags();
-        collectTags.execute();
-        */
-
-
-
         class CollectLevels extends AsyncTask<Void, Void, HashMap<String, Pair<Level, Game>>> {
 
             @Override
@@ -113,6 +87,7 @@ public class QuestionsAnswersLevelSelect extends AppCompatActivity {
                 HashMap<String, Pair<Level, Game>> levels = new HashMap<>();
 
                 for (Level activity: activities) {
+                    // Sepratate "géographie" and other activité between all avtivities
                     if(activity.getGameMode().equalsIgnoreCase("géographie") /*|| <other activity> */){
                         levels.put(
                                 activity.getName(),
@@ -143,7 +118,7 @@ public class QuestionsAnswersLevelSelect extends AppCompatActivity {
 
     private void initView() {
 
-        //for (String tag : this.allTags) {
+        // Loop on every exercices
         for (Map.Entry<String, Pair<Level, Game>> entry : questionsAnswersLevels.entrySet()) {
             LinearLayout globalLayout = new LinearLayout(this);
             globalLayout.setOrientation(LinearLayout.VERTICAL);
@@ -165,7 +140,7 @@ public class QuestionsAnswersLevelSelect extends AppCompatActivity {
                 }
             });
 
-
+            // Display score if it already exist
             RatingBar score = (RatingBar) layout.findViewById(R.id.question_answers_button_score);
             Level level = entry.getValue().getItem1();
             Game game = entry.getValue().getItem2();
