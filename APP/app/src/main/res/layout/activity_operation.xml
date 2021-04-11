@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".mathematics.OperationActivity">
+    tools:context=".Exercices.mathematics.OperationActivity">
 
     <TextView
         android:id="@+id/operation_title"
@@ -83,6 +83,14 @@
         android:layout_gravity="center"
         android:text="@string/Validate_text"
         app:backgroundTint="@color/blue"/>
+
+    <TextView
+        android:id="@+id/operation_advice"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom|center"
+        android:textSize="15dp"
+        android:textStyle="italic" />
 
 
 </LinearLayout>

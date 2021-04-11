@@ -14,9 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.nezanmartin.lecoledesloustics.Database.DatabaseClient;
-import fr.nezanmartin.lecoledesloustics.Database.Level.Level;
 import fr.nezanmartin.lecoledesloustics.Database.User.User;
-import fr.nezanmartin.lecoledesloustics.mathematics.OperationActivity;
 
 public class MainActivity extends AppCompatActivity {
 

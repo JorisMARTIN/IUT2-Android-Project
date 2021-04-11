@@ -1,4 +1,4 @@
-package fr.nezanmartin.lecoledesloustics.mathematics.model;
+package fr.nezanmartin.lecoledesloustics.Exercices.mathematics.model;
 
 public class Soustraction extends Operation {
 

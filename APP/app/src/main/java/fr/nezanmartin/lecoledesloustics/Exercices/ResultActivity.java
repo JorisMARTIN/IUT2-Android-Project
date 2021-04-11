@@ -1,4 +1,4 @@
-package fr.nezanmartin.lecoledesloustics.mathematics;
+package fr.nezanmartin.lecoledesloustics.Exercices;
 
 import androidx.appcompat.app.AppCompatActivity;
 

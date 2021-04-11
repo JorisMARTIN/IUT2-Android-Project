@@ -1,8 +1,8 @@
 package fr.nezanmartin.lecoledesloustics;
 
 import androidx.appcompat.app.AppCompatActivity;
-import fr.nezanmartin.lecoledesloustics.QuestionsAnswers.QuestionsAnswersLevelSelect;
-import fr.nezanmartin.lecoledesloustics.mathematics.MathematicsLevelSelect;
+import fr.nezanmartin.lecoledesloustics.Exercices.QuestionsAnswers.QuestionsAnswersLevelSelect;
+import fr.nezanmartin.lecoledesloustics.Exercices.mathematics.MathematicsLevelSelect;
 
 import android.content.Intent;
 import android.os.Bundle;

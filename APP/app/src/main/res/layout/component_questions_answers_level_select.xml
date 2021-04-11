@@ -12,5 +12,11 @@
         android:layout_marginBottom="10dp"
         android:gravity="center"/>
 
-
+    <RatingBar
+        android:id="@+id/question_answers_button_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:isIndicator="true"
+        android:layout_gravity="center"
+        android:numStars="3" />
 </LinearLayout>

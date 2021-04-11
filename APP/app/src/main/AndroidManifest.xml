@@ -9,12 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.LécoleDesLoustics">
-        <activity android:name=".QuestionsAnswers.QuestionsAnswersActivity"></activity>
-        <activity android:name=".QuestionsAnswers.QuestionsAnswersLevelSelect" />
-        <activity android:name=".mathematics.MathematicsLevelSelect" />
+        <activity android:name=".Exercices.QuestionsAnswers.QuestionsAnswersActivity"></activity>
+        <activity android:name=".Exercices.QuestionsAnswers.QuestionsAnswersLevelSelect" />
+        <activity android:name=".Exercices.mathematics.MathematicsLevelSelect" />
         <activity android:name=".NewProfileActivity" />
-        <activity android:name=".mathematics.ResultActivity" />
-        <activity android:name=".mathematics.OperationActivity" />
+        <activity android:name=".Exercices.ResultActivity" />
+        <activity android:name=".Exercices.mathematics.OperationActivity" />
         <activity android:name=".LevelSelect" />
         <activity android:name=".MainActivity">
             <intent-filter>

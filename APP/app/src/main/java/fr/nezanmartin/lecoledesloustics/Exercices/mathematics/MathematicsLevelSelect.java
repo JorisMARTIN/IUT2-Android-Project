@@ -1,4 +1,4 @@
-package fr.nezanmartin.lecoledesloustics.mathematics;
+package fr.nezanmartin.lecoledesloustics.Exercices.mathematics;
 
 import androidx.appcompat.app.AppCompatActivity;
 import fr.nezanmartin.lecoledesloustics.Database.DatabaseClient;
@@ -6,7 +6,6 @@ import fr.nezanmartin.lecoledesloustics.Database.Game.Game;
 import fr.nezanmartin.lecoledesloustics.Database.Game.GameDAO;
 import fr.nezanmartin.lecoledesloustics.Database.Level.Level;
 import fr.nezanmartin.lecoledesloustics.Database.Level.LevelDAO;
-import fr.nezanmartin.lecoledesloustics.LevelSelect;
 import fr.nezanmartin.lecoledesloustics.MainActivity;
 import fr.nezanmartin.lecoledesloustics.R;
 import fr.nezanmartin.lecoledesloustics.utils.Pair;
@@ -67,19 +66,20 @@ public class MathematicsLevelSelect extends AppCompatActivity {
                 LevelDAO levelDAO = database.getAppDatabase().levelDAO();
                 GameDAO gameDAO = database.getAppDatabase().gameDAO();
 
-                // getting users
-                List<String> activities = levelDAO.getActivities();
+                List<Level> activities = levelDAO.getAllLevels();
 
                 HashMap<String, Pair<List<Level>, List<Game>>> levels = new HashMap<>();
 
-                for (String activity: activities) {
-                    levels.put(
-                            activity,
-                            new Pair<>(
-                                    levelDAO.getLevels(activity),
-                                    gameDAO.getCurrentUserGames()
-                            )
-                    );
+                for (Level activity: activities) {
+                    if(!activity.getGameMode().equalsIgnoreCase("geographie")){
+                        levels.put(
+                                activity.getName(),
+                                new Pair<>(
+                                        levelDAO.getLevels(activity.getName()),
+                                        gameDAO.getCurrentUserGames()
+                                )
+                        );
+                    }
                 }
 
                 return levels;

@@ -1,23 +1,21 @@
-package fr.nezanmartin.lecoledesloustics.QuestionsAnswers;
+package fr.nezanmartin.lecoledesloustics.Exercices.QuestionsAnswers;
 
 import androidx.appcompat.app.AppCompatActivity;
 import fr.nezanmartin.lecoledesloustics.Database.DatabaseClient;
 import fr.nezanmartin.lecoledesloustics.Database.Questions.Question;
-import fr.nezanmartin.lecoledesloustics.QuestionsAnswers.model.QuestionsAnswersLevel;
+import fr.nezanmartin.lecoledesloustics.Exercices.QuestionsAnswers.model.QuestionsAnswersLevel;
 import fr.nezanmartin.lecoledesloustics.R;
 
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.Toast;
+import android.widget.RatingBar;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 public class QuestionsAnswersLevelSelect extends AppCompatActivity {
@@ -48,7 +46,7 @@ public class QuestionsAnswersLevelSelect extends AppCompatActivity {
 
     private void initExercices() {
 
-        class CollectTags extends AsyncTask<Void, Void, List<String>>{
+        class CollectTags extends AsyncTask<Void, Void, List<String>> {
 
             @Override
             protected List<String> doInBackground(Void... voids) {
@@ -73,7 +71,7 @@ public class QuestionsAnswersLevelSelect extends AppCompatActivity {
 
     private void initView() {
 
-        for(String tag : this.allTags){
+        for (String tag : this.allTags) {
             LinearLayout globalLayout = new LinearLayout(this);
             globalLayout.setOrientation(LinearLayout.VERTICAL);
             globalLayout.setGravity(Gravity.CENTER);
@@ -86,9 +84,18 @@ public class QuestionsAnswersLevelSelect extends AppCompatActivity {
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    getAllQuestionByTag(tag);
+
+                    Intent intent = new Intent(QuestionsAnswersLevelSelect.this, QuestionsAnswersActivity.class);
+                    intent.putExtra(QuestionsAnswersActivity.TAG_KEY, tag);
+
+                    startActivity(intent);
                 }
             });
+
+
+            RatingBar score = (RatingBar) layout.findViewById(R.id.question_answers_button_score);
+            //TODO: Display score
+
             globalLayout.addView(layout);
             globalLayout.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
 
@@ -96,38 +103,4 @@ public class QuestionsAnswersLevelSelect extends AppCompatActivity {
         }
     }
 
-    private void getAllQuestionByTag(String tag) {
-
-        class CollectQuestions extends AsyncTask<Void, Void, List<Question>>{
-
-            @Override
-            protected List<Question> doInBackground(Void... voids) {
-
-                List<Question> questions = database.getAppDatabase().questionDAO().getQuestionsByTag(tag);
-
-                return questions;
-            }
-
-            @Override
-            protected void onPostExecute(List<Question> questions) {
-                super.onPostExecute(questions);
-
-                launchActivity(questions);
-
-            }
-        }
-
-        CollectQuestions collectQuestions = new CollectQuestions();
-        collectQuestions.execute();
-
-    }
-
-    private void launchActivity(List<Question> questions) {
-
-        QuestionsAnswersLevel level = new QuestionsAnswersLevel(new ArrayList<>(questions));
-
-        Intent intent = new Intent(this, QuestionsAnswersLevel.class);
-        intent.putExtra(QuestionsAnswersActivity.LEVEL_KEY, level);
-
-    }
 }

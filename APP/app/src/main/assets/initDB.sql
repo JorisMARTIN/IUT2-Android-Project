@@ -35,43 +35,96 @@ INSERT INTO user VALUES (
 
 INSERT INTO level VALUES (
     0,
-    "Les multiplications",
-    1,
-    "multiplication"
-);
-
-INSERT INTO level VALUES (
-    1,
-    "Les multiplications",
-    2,
-    "multiplication"
-);
-
-INSERT INTO level VALUES (
-    2,
-    "Les multiplications",
-    3,
-    "multiplication"
-);
-
-INSERT INTO level VALUES (
-    3,
     "Les additions",
     1,
     "addition"
+);
+
+INSERT INTO level VALUES (
+    1,
+    "Les additions",
+    2,
+    "addition"
+);
+
+INSERT INTO level VALUES (
+    2,
+    "Les additions",
+    3,
+    "addition"
+);
+
+INSERT INTO level VALUES (
+    3,
+    "Les soustractions",
+    1,
+    "soustraction"
 );
 
 INSERT INTO level VALUES (
     4,
-    "Les additions",
+    "Les soustractions",
     2,
-    "addition"
+    "soustraction"
 );
 
 INSERT INTO level VALUES (
     5,
-    "Les additions",
+    "Les soustractions",
     3,
-    "addition"
+    "soustraction"
 );
+
+INSERT INTO level VALUES (
+    6,
+    "Les multiplications",
+    1,
+    "multiplication"
+);
+
+INSERT INTO level VALUES (
+    7,
+    "Les multiplications",
+    2,
+    "multiplication"
+);
+
+INSERT INTO level VALUES (
+    8,
+    "Les multiplications",
+    3,
+    "multiplication"
+);
+
+INSERT INTO level VALUES (
+    9,
+    "Les divisions",
+    1,
+    "division"
+);
+
+INSERT INTO level VALUES (
+    10,
+    "Les divisions",
+    2,
+    "division"
+);
+
+INSERT INTO level VALUES (
+    11,
+    "Les divisions",
+    3,
+    "division"
+);
+
+INSERT INTO level VALUES (
+    12,
+    "Les capitales",
+    3,
+    "geographie"
+);
+
+
+
+
 

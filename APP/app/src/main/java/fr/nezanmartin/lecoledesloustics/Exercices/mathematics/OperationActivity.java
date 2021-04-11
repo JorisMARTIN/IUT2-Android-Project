@@ -1,4 +1,4 @@
-package fr.nezanmartin.lecoledesloustics.mathematics;
+package fr.nezanmartin.lecoledesloustics.Exercices.mathematics;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,20 +14,17 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.List;
 
 import fr.nezanmartin.lecoledesloustics.Database.DatabaseClient;
 import fr.nezanmartin.lecoledesloustics.Database.Game.Game;
 import fr.nezanmartin.lecoledesloustics.Database.Game.GameDAO;
-import fr.nezanmartin.lecoledesloustics.Database.Level.Level;
 import fr.nezanmartin.lecoledesloustics.Database.User.UserDAO;
+import fr.nezanmartin.lecoledesloustics.Exercices.ResultActivity;
 import fr.nezanmartin.lecoledesloustics.R;
-import fr.nezanmartin.lecoledesloustics.mathematics.model.ListOperation;
-import fr.nezanmartin.lecoledesloustics.mathematics.model.Operation;
-import fr.nezanmartin.lecoledesloustics.mathematics.model.Operations;
-import fr.nezanmartin.lecoledesloustics.utils.Pair;
+import fr.nezanmartin.lecoledesloustics.Exercices.mathematics.model.ListOperation;
+import fr.nezanmartin.lecoledesloustics.Exercices.mathematics.model.Operation;
+import fr.nezanmartin.lecoledesloustics.Exercices.mathematics.model.Operations;
 
 public class OperationActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -38,7 +35,7 @@ public class OperationActivity extends AppCompatActivity implements View.OnClick
 
     //DATA
     private DatabaseClient database;
-    boolean isCorrection = false; //Boolean for determine if the activity is in correction mode or not
+    boolean isCorrection = false; //Boolean to determine if the activity is in correction mode or not
     int finalScore;
     int difficulty;
     Operations operation;
@@ -52,7 +49,7 @@ public class OperationActivity extends AppCompatActivity implements View.OnClick
     //VIEW
     LinearLayout operationContainner;
 
-    TextView operationTitle, operationID, question;
+    TextView operationTitle, operationID, question, advice;
     EditText answer;
 
     Button previousButton, nextButton, validate;
@@ -71,6 +68,7 @@ public class OperationActivity extends AppCompatActivity implements View.OnClick
 
         question = findViewById(R.id.operation_question);
         answer = findViewById(R.id.operation_answer);
+        advice = findViewById(R.id.operation_advice);
 
         previousButton = findViewById(R.id.operation_previous_button);
         nextButton = findViewById(R.id.operation_next_button);
@@ -144,6 +142,11 @@ public class OperationActivity extends AppCompatActivity implements View.OnClick
     }
 
     private void updateDisplay(){
+
+        if(isCorrection){
+            advice.setText("Attention : Tu dois aller au bout de la correction pour que ton premier score soit sauvegardé !");
+        }
+
         operationID.setText((currentOperationID +1)  + " /10");
         question.setText(getOperationQuestionById(currentOperationID));
         if(results.get(getOperationInMapByIndex(currentOperationID)) == -1){
@@ -221,7 +224,7 @@ public class OperationActivity extends AppCompatActivity implements View.OnClick
 
                 SaveScore sc = new SaveScore();
                 sc.execute();
-                finish();
+
             } else {
                 isCorrection = true;
                 updateDisplay();

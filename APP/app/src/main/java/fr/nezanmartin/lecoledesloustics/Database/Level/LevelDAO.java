@@ -16,6 +16,9 @@ public interface LevelDAO {
     @Query("SELECT * FROM level WHERE name = (:activity)")
     List<Level> getLevels(String activity);
 
+    @Query("SELECT * FROM level")
+    List<Level> getAllLevels();
+
     @Insert
     void insert(Level level);
 
