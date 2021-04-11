@@ -124,6 +124,13 @@ INSERT INTO level VALUES (
     "géographie"
 );
 
+INSERT INTO level VALUES (
+    13,
+    "Conjugaison",
+    1,
+    "conjugaison"
+);
+
 
 
 

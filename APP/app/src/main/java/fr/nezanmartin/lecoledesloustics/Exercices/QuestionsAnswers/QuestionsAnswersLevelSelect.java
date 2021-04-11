@@ -135,6 +135,7 @@ public class QuestionsAnswersLevelSelect extends AppCompatActivity {
 
                     Intent intent = new Intent(QuestionsAnswersLevelSelect.this, QuestionsAnswersActivity.class);
                     intent.putExtra(QuestionsAnswersActivity.TAG_KEY, entry.getValue().getItem1().getGameMode());
+                    intent.putExtra(QuestionsAnswersActivity.LEVEL_ID_KEY, entry.getValue().getItem1().getId());
 
                     startActivity(intent);
                 }

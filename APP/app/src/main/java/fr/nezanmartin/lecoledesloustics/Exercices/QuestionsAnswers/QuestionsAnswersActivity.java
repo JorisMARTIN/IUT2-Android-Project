@@ -33,6 +33,7 @@ import java.util.List;
 public class QuestionsAnswersActivity extends AppCompatActivity {
 
     public static final String TAG_KEY = "tag_key";
+    public static final String LEVEL_ID_KEY = "level_id_key";
     private static final int QUESTIONS_ANSWERS_REQUEST = 1;
 
     // VIEW
@@ -44,6 +45,7 @@ public class QuestionsAnswersActivity extends AppCompatActivity {
     // DATA
     QuestionsAnswersLevel level;
     String tag;
+    int level_id;
     DatabaseClient database;
     HashMap<Integer, RadioButton> answers;
 
@@ -79,6 +81,7 @@ public class QuestionsAnswersActivity extends AppCompatActivity {
         answers = new HashMap<>();
 
         tag = getIntent().getStringExtra(TAG_KEY);
+        level_id = getIntent().getIntExtra(LEVEL_ID_KEY, 0);
 
         /* Async class for collect questions all question from a specific tag */
         class CollectQuestions extends AsyncTask<Void, Void, List<Question>> {
@@ -245,7 +248,7 @@ public class QuestionsAnswersActivity extends AppCompatActivity {
                     if (game == null) {
                         game = new Game();
                         game.setUserId(userID);
-                        game.setLevelId(12);
+                        game.setLevelId(level_id);
                         game.setScore(score);
                         gameDAO.insert(game);
                     } else {

@@ -26,4 +26,27 @@ INSERT INTO question VALUES
 (17, "Quelle est la capitale du Maroc ?", "Casablanca, Marrakech, Rabat", 2, "géographie"),
 (18, "Quelle est la capitale de la Tunisie ?", "Tunis, ie, Sfax", 0, "géographie"),
 (19, "Quelle est la capitale du Mexique ?", "Monterrey, Mexico, Guadalajara", 1, "géographie"),
-(20, "Quelle est la capitale du Canada ?", "Montréal, Ottawa, Toronto", 1, "géographie");
+(20, "Quelle est la capitale du Canada ?", "Montréal, Ottawa, Toronto", 1, "géographie"),
+
+(21, "Quelle est la 1ère personne du singulier ?", "Je, Nous, Il/Elle", 0, "conjugaison"),
+(22, "Quelle est la 2ème personne du singulier ?", "Je, Vous, Tu", 2, "conjugaison"),
+(23, "Quelle est la 3ème personne du singulier ?", "Il/Elle, Ils/Elles, Vous", 0, "conjugaison"),
+(24, "Quelle est la 1ère personne du pluriel ?", "Tu, Nous, Vous", 1, "conjugaison"),
+(25, "Quelle est la 2ème personne du pluriel ?", "Nous, Vous, Ils/Elles", 2, "conjugaison"),
+(26, "Quelle est la 3ème personne du pluriel ?", "Tu, Ils/Elles, Il/Elle", 1, "conjugaison"),
+(27, "Conjuguez le verbe manger à la 1ère personne du singulier au présent :", "Je mange, Je manges, Je mangent", 0, "conjugaison"),
+(28, "Conjuguez le verbe manger à la 1ère personne du plurielle au présent :", "Nous mangeon, Nous mangons, Nous mangeons", 2, "conjugaison"),
+(29, "Conjuguez le verbe dire à la 3ème personne du plurielle au présent :", "Ils/Elle dites, Ils/Elle dises, Ils/Elle disent", 2, "conjugaison"),
+(29, "Conjuguez le verbe mentir à la 2ème personne du singulier au présent :", "Tu ments, Tu mens, Tu ment", 1, "conjugaison"),
+(30, "Conjuguez le verbe courir à la 1ère personne du plurielle au présent :", "Nous courons, Nous couront, Nous couron", 0, "conjugaison"),
+(31, "Conjuguez le verbe suivre à la 3ème personne du singulier au présent :", "Il/Elle suis, Il/Elle suit, Il/Elle sui", 1, "conjugaison"),
+(32, "Conjuguez le verbe avaler à la 2ème personne du pluriel au présent :", "Vous avaler, Vous avalez, Vous avalée", 1, "conjugaison"),
+(33, "Conjuguez le verbe dire à la 2ème personne du pluriel au présent :", "Vous disez, Vous diser, Vous dites", 2, "conjugaison"),
+(34, "Conjuguez le verbe dormir à la 1ère personne du singulier au présent :", "Je dors, Tu dors, Je dor", 0, "conjugaison"),
+(35, "Conjuguez le verbe prendre à la 2ème personne du pluriel au présent :", "Vous prendez, Vous prenez, Vous prennee", 1, "conjugaison"),
+(36, "Conjuguez le verbe vendre à la 3ème personne du pluriel au présent :", "Ils/Elles vends, Ils/Elles vendent, Il/Elle vendent", 1, "conjugaison"),
+(37, "Conjuguez le verbe nettoyer à la 2ème personne du singulier au présent :", "Tu nettoyes, Tu nettoies, Tu nettoie", 1, "conjugaison"),
+(38, "Conjuguez le verbe mordre à la 1ème personne du pluriel au présent :", "Nous mordon, Nous mordont, Nous mordons", 2, "conjugaison"),
+(39, "Conjuguez le verbe écrir à la 3ème personne du singulier au présent :", "il/Elle écris, Il/Elle écrit, Il/Elle écrie", 1, "conjugaison"),
+(40, "Conjuguez le verbe rédiger à la 1ème personne du singulier au présent :", "Je rédige, Je rédiges, Je rédiget", 0, "conjugaison")
+;
