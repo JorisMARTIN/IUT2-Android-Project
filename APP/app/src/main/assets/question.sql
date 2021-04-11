@@ -7,7 +7,7 @@ CREATE TABLE question (
 );
 
 INSERT INTO question VALUES
-(1, "Quelle est la capitale de la France ?", "Lyon, Marseille, Paris", 2, "Géeographie"),
+(1, "Quelle est la capitale de la France ?", "Lyon, Marseille, Paris", 2, "Géographie"),
 (2, "Quelle est la capitale de l'Italie ?", "Rome, Turin, Naples", 0, "Géographie"),
 (3, "Quelle est la capitale de l'Angleterre ?", "Londres, Manchester, Cambridge", 0, "Géographie"),
 (4, "Quelle est la capitale de l'Allemagne ?", "Munich, Berlin, Dortmund", 1, "Géographie"),
