@@ -121,7 +121,7 @@ INSERT INTO level VALUES (
     12,
     "Les capitales",
     3,
-    "geographie"
+    "géographie"
 );
 
 

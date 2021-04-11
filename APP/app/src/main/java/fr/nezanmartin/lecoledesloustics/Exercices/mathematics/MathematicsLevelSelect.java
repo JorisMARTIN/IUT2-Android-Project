@@ -27,7 +27,7 @@ import java.util.Map;
 public class MathematicsLevelSelect extends AppCompatActivity {
 
     private DatabaseClient database;
-    HashMap<String, Pair<List<Level>, List<Game>>> allLevels;
+    HashMap<String, Pair<List<Level>, List<Game>>> mathsLevels;
     boolean invalidated;
 
     @Override
@@ -89,7 +89,7 @@ public class MathematicsLevelSelect extends AppCompatActivity {
             protected void onPostExecute(HashMap<String, Pair<List<Level>, List<Game>> > levels){
                 super.onPostExecute(levels);
 
-                allLevels = levels;
+                mathsLevels = levels;
                 initView();
             }
 
@@ -103,7 +103,7 @@ public class MathematicsLevelSelect extends AppCompatActivity {
         LayoutInflater inflater = getLayoutInflater();
         LinearLayout levelSelectArea = findViewById(R.id.mathematics_level_select_area);
 
-        for (Map.Entry<String, Pair<List<Level>, List<Game>>> entry : allLevels.entrySet()) {
+        for (Map.Entry<String, Pair<List<Level>, List<Game>>> entry : mathsLevels.entrySet()) {
             LinearLayout levelActivity = (LinearLayout) inflater.inflate(R.layout.component_level_activity, null);
 
             TextView levelActivityName = levelActivity.findViewById(R.id.level_activity_name);

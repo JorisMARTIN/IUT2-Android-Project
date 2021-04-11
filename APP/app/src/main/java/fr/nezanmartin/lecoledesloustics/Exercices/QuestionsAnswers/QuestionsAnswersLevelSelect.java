@@ -2,9 +2,13 @@ package fr.nezanmartin.lecoledesloustics.Exercices.QuestionsAnswers;
 
 import androidx.appcompat.app.AppCompatActivity;
 import fr.nezanmartin.lecoledesloustics.Database.DatabaseClient;
-import fr.nezanmartin.lecoledesloustics.Database.Questions.Question;
-import fr.nezanmartin.lecoledesloustics.Exercices.QuestionsAnswers.model.QuestionsAnswersLevel;
+import fr.nezanmartin.lecoledesloustics.Database.Game.Game;
+import fr.nezanmartin.lecoledesloustics.Database.Game.GameDAO;
+import fr.nezanmartin.lecoledesloustics.Database.Level.Level;
+import fr.nezanmartin.lecoledesloustics.Database.Level.LevelDAO;
+import fr.nezanmartin.lecoledesloustics.Database.User.UserDAO;
 import fr.nezanmartin.lecoledesloustics.R;
+import fr.nezanmartin.lecoledesloustics.utils.Pair;
 
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -16,7 +20,9 @@ import android.widget.LinearLayout;
 import android.widget.RatingBar;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class QuestionsAnswersLevelSelect extends AppCompatActivity {
 
@@ -28,6 +34,7 @@ public class QuestionsAnswersLevelSelect extends AppCompatActivity {
 
     // DATA
     List<String> allTags;
+    HashMap<String, Pair<Level, Game>> questionsAnswersLevels;
 
 
     @Override
@@ -46,6 +53,7 @@ public class QuestionsAnswersLevelSelect extends AppCompatActivity {
 
     private void initExercices() {
 
+        /*
         class CollectTags extends AsyncTask<Void, Void, List<String>> {
 
             @Override
@@ -67,11 +75,56 @@ public class QuestionsAnswersLevelSelect extends AppCompatActivity {
 
         CollectTags collectTags = new CollectTags();
         collectTags.execute();
+        */
+
+
+
+        class CollectLevels extends AsyncTask<Void, Void, HashMap<String, Pair<Level, Game>>> {
+
+            @Override
+            protected HashMap<String, Pair<Level, Game>> doInBackground(Void... voids) {
+
+                LevelDAO levelDAO = database.getAppDatabase().levelDAO();
+                GameDAO gameDAO = database.getAppDatabase().gameDAO();
+                UserDAO userDAO = database.getAppDatabase().userDAO();
+
+                List<Level> activities = levelDAO.getAllLevels();
+
+                HashMap<String, Pair<Level, Game>> levels = new HashMap<>();
+
+                for (Level activity: activities) {
+                    if(activity.getGameMode().equalsIgnoreCase("geographie") /*|| <other activity> */){
+                        levels.put(
+                                activity.getName(),
+                                new Pair<Level, Game>(
+                                        levelDAO.getLevelById(activity.getId()),
+                                        gameDAO.getLevelGame(userDAO.getCurrentUser().getId(), activity.getId())
+                                )
+                        );
+                    }
+                }
+
+                return levels;
+            }
+
+            @Override
+            protected void onPostExecute(HashMap<String, Pair<Level, Game>> levels){
+                super.onPostExecute(levels);
+
+                questionsAnswersLevels = levels;
+                initView();
+            }
+
+        }
+
+        CollectLevels cl = new CollectLevels();
+        cl.execute();
     }
 
     private void initView() {
 
-        for (String tag : this.allTags) {
+        //for (String tag : this.allTags) {
+        for (Map.Entry<String, Pair<Level, Game>> entry : questionsAnswersLevels.entrySet()) {
             LinearLayout globalLayout = new LinearLayout(this);
             globalLayout.setOrientation(LinearLayout.VERTICAL);
             globalLayout.setGravity(Gravity.CENTER);
@@ -79,14 +132,14 @@ public class QuestionsAnswersLevelSelect extends AppCompatActivity {
             LinearLayout layout = (LinearLayout) getLayoutInflater().inflate(R.layout.component_questions_answers_level_select, null);
             Button button = (Button) layout.findViewById(R.id.question_answers_template_button);
 
-            button.setText(tag);
+            button.setText(entry.getValue().getItem1().getName());
 
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
                     Intent intent = new Intent(QuestionsAnswersLevelSelect.this, QuestionsAnswersActivity.class);
-                    intent.putExtra(QuestionsAnswersActivity.TAG_KEY, tag);
+                    intent.putExtra(QuestionsAnswersActivity.TAG_KEY, entry.getValue().getItem1().getGameMode());
 
                     startActivity(intent);
                 }
@@ -94,7 +147,12 @@ public class QuestionsAnswersLevelSelect extends AppCompatActivity {
 
 
             RatingBar score = (RatingBar) layout.findViewById(R.id.question_answers_button_score);
-            //TODO: Display score
+            Level level = entry.getValue().getItem1();
+            Game game = entry.getValue().getItem2();
+
+            if (game.getLevelId() == level.getId()) {
+                score.setRating(game.getScore());
+            }
 
             globalLayout.addView(layout);
             globalLayout.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
