@@ -1,4 +1,4 @@
-CREATE TABLE questions (
+CREATE TABLE question (
     id INTEGER NOT NULL PRIMARY KEY,
     question TEXT NOT NULL,
     answers TEXT NOT NULL,
@@ -6,7 +6,7 @@ CREATE TABLE questions (
     tag TEXT NOT NULL
 );
 
-INSERT INTO questions VALUES
+INSERT INTO question VALUES
 (1, "Quelle est la capitale de la France ?", "Lyon, Marseille, Paris", 2, "Geographie"),
 (2, "Quelle est la capitale de l'Italie ?", "Rome, Turin, Naples", 0, "Geographie"),
 (3, "Quelle est la capitale de l'Angleterre ?", "Londres, Manchester, Cambridge", 0, "Geographie"),
