@@ -1,9 +1,9 @@
 CREATE TABLE question (
     id INTEGER NOT NULL PRIMARY KEY,
-    question_text TEXT NOT NULL,
-    answers TEXT NOT NULL,
+    question TEXT,
+    answers TEXT,
     good_answer INTEGER NOT NULL, -- The index in the future array after parsing of answers --
-    tag TEXT NOT NULL
+    tag TEXT
 );
 
 INSERT INTO question VALUES
