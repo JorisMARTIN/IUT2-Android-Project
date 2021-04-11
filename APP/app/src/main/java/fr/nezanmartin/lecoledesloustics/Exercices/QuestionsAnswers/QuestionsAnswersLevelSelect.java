@@ -27,7 +27,7 @@ import java.util.Map;
 public class QuestionsAnswersLevelSelect extends AppCompatActivity {
 
     private DatabaseClient database;
-
+    boolean invalidated;
 
     // VIEW
     LinearLayout levelSelectArea;
@@ -47,9 +47,29 @@ public class QuestionsAnswersLevelSelect extends AppCompatActivity {
 
         allTags = new ArrayList<>();
 
+        invalidated = false;
+
         initExercices();
 
     }
+
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        invalidated = true;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if (invalidated) {
+            recreate();
+        }
+    }
+
 
     private void initExercices() {
 
