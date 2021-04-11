@@ -88,7 +88,9 @@ public class QuestionsAnswersLevelSelect extends AppCompatActivity {
 
                 for (Level activity: activities) {
                     // Sepratate "géographie" and other activité between all avtivities
-                    if(activity.getGameMode().equalsIgnoreCase("géographie") /*|| <other activity> */){
+                    if(activity.getGameMode().equalsIgnoreCase("géographie")
+                    || activity.getGameMode().equalsIgnoreCase("conjugaison")
+                    /*|| <other activity> */){
                         levels.put(
                                 activity.getName(),
                                 new Pair<>(

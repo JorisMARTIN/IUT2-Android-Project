@@ -77,7 +77,7 @@ public class MathematicsLevelSelect extends AppCompatActivity {
 
                 for (Level activity: activities) {
                     // Ignores question/answers activities
-                    if(!activity.getGameMode().equalsIgnoreCase("géographie")){
+                    if(!(activity.getGameMode().equalsIgnoreCase("géographie") || activity.getGameMode().equalsIgnoreCase("conjugaison"))){
                         levels.put(
                                 activity.getName(),
                                 new Pair<>(

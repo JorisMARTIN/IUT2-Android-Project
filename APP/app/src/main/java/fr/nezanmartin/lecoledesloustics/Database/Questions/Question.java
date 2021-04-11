@@ -43,7 +43,7 @@ public class Question {
     }
 
     public String[] getAllAnswers(){
-        return getAnswers().replace(" ", "").split(",");
+        return getAnswers().replace(" ", "").replace("_", " ").split(",");
     }
 
     /**
