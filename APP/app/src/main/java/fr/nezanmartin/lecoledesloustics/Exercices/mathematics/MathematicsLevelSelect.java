@@ -59,6 +59,10 @@ public class MathematicsLevelSelect extends AppCompatActivity {
 
     private void getLevels() {
 
+        /**
+         * Async task to fetch activities (each levels)
+         * and associated game (object containing the score of the user at a level)
+         */
         class CollectLevels extends AsyncTask<Void, Void, HashMap<String, Pair<List<Level>, List<Game>>>> {
 
             @Override
@@ -68,9 +72,11 @@ public class MathematicsLevelSelect extends AppCompatActivity {
 
                 List<Level> activities = levelDAO.getAllLevels();
 
+                // Stores for each activities, all levels and games played by the current user.
                 HashMap<String, Pair<List<Level>, List<Game>>> levels = new HashMap<>();
 
                 for (Level activity: activities) {
+                    // Ignores question/answers activities
                     if(!activity.getGameMode().equalsIgnoreCase("géographie")){
                         levels.put(
                                 activity.getName(),
@@ -90,7 +96,7 @@ public class MathematicsLevelSelect extends AppCompatActivity {
                 super.onPostExecute(levels);
 
                 mathsLevels = levels;
-                initView();
+                initView(); // When done, display the view to the user
             }
 
         }
@@ -103,7 +109,9 @@ public class MathematicsLevelSelect extends AppCompatActivity {
         LayoutInflater inflater = getLayoutInflater();
         LinearLayout levelSelectArea = findViewById(R.id.mathematics_level_select_area);
 
+        // For each activities... (addition / substraction / etc...)
         for (Map.Entry<String, Pair<List<Level>, List<Game>>> entry : mathsLevels.entrySet()) {
+            // Inflate a component level activity with a title and an area
             LinearLayout levelActivity = (LinearLayout) inflater.inflate(R.layout.component_level_activity, null);
 
             TextView levelActivityName = levelActivity.findViewById(R.id.level_activity_name);
@@ -111,15 +119,18 @@ public class MathematicsLevelSelect extends AppCompatActivity {
 
             LinearLayout levelActivityArea = levelActivity.findViewById(R.id.level_activity_layout);
 
+            // For each activity level... (addition lvl 1, addition lvl 2, etc...)
             for (Level level: entry.getValue().getItem1()) {
+                // Inflate a component level button with a button and a score display
                 LinearLayout levelButton = (LinearLayout) inflater.inflate(R.layout.component_level_button, null);
+
                 Button levelButtonButton = levelButton.findViewById(R.id.level_button_button);
                 levelButtonButton.setText(String.valueOf(level.getDifficulty()));
 
                 levelButtonButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-
+                        // When we click the button, it start the corresponding level
                         Intent intent = new Intent(MathematicsLevelSelect.this, OperationActivity.class);
                         intent.putExtra(OperationActivity.DIFFICULTY_KEY, level.getDifficulty());
                         intent.putExtra(OperationActivity.OPERATION_KEY, level.getGameMode());
@@ -132,11 +143,12 @@ public class MathematicsLevelSelect extends AppCompatActivity {
                 });
 
                 RatingBar levelButtonScore = levelButton.findViewById(R.id.level_button_score);
-                levelButtonScore.setRating((float) 0);
+                levelButtonScore.setRating((float) 0); // Set default rating
 
+                // From all user previous games, find the game corresponding to this level
                 for (Game game: entry.getValue().getItem2()) {
                     if (game.getLevelId() == level.getId()) {
-                        levelButtonScore.setRating(game.getScore());
+                        levelButtonScore.setRating(game.getScore()); // Overwrite default rating
                     }
                 }
 
