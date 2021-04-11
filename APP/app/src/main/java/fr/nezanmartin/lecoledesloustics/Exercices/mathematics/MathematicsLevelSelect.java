@@ -71,7 +71,7 @@ public class MathematicsLevelSelect extends AppCompatActivity {
                 HashMap<String, Pair<List<Level>, List<Game>>> levels = new HashMap<>();
 
                 for (Level activity: activities) {
-                    if(!activity.getGameMode().equalsIgnoreCase("geographie")){
+                    if(!activity.getGameMode().equalsIgnoreCase("géographie")){
                         levels.put(
                                 activity.getName(),
                                 new Pair<>(

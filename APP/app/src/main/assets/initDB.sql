@@ -120,7 +120,7 @@ INSERT INTO level VALUES (
 INSERT INTO level VALUES (
     12,
     "Les capitales",
-    3,
+    1,
     "géographie"
 );
 

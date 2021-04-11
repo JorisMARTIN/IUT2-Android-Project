@@ -93,10 +93,10 @@ public class QuestionsAnswersLevelSelect extends AppCompatActivity {
                 HashMap<String, Pair<Level, Game>> levels = new HashMap<>();
 
                 for (Level activity: activities) {
-                    if(activity.getGameMode().equalsIgnoreCase("geographie") /*|| <other activity> */){
+                    if(activity.getGameMode().equalsIgnoreCase("géographie") /*|| <other activity> */){
                         levels.put(
                                 activity.getName(),
-                                new Pair<Level, Game>(
+                                new Pair<>(
                                         levelDAO.getLevelById(activity.getId()),
                                         gameDAO.getLevelGame(userDAO.getCurrentUser().getId(), activity.getId())
                                 )
@@ -150,7 +150,7 @@ public class QuestionsAnswersLevelSelect extends AppCompatActivity {
             Level level = entry.getValue().getItem1();
             Game game = entry.getValue().getItem2();
 
-            if (game.getLevelId() == level.getId()) {
+            if (game != null && game.getLevelId() == level.getId()) {
                 score.setRating(game.getScore());
             }
 
